@@ -1,10 +1,9 @@
 package com.SG.Stealth.Garage.API.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +15,10 @@ public class Vehicle {
 
     private String brand;
     private int year;
-    private double placa;
+    private double licensePlate;
+
+    @OneToMany(mappedBy = "client")
+    private List<Vehicle> vehicles = new ArrayList<>();
 
     public Vehicle() {
     }
@@ -25,7 +27,7 @@ public class Vehicle {
         this.id = id;
         this.brand = brand;
         this.year = year;
-        this.placa = placa;
+        this.licensePlate = placa;
     }
 
     public Long getId() {
@@ -48,12 +50,12 @@ public class Vehicle {
         this.year = year;
     }
 
-    public double getPlaca() {
-        return placa;
+    public double getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setPlaca(double placa) {
-        this.placa = placa;
+    public void setLicensePlate(double licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     @Override

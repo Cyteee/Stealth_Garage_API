@@ -12,14 +12,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @OneToMany
+    @JoinColumn(name = "client_id")
+    private User name;
     private String email;
     private String phoneNumber;
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String phoneNumber) {
+    public User(Long id, User name, String email, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -30,11 +32,11 @@ public class User {
         return id;
     }
 
-    public String getName() {
+    public User getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(User name) {
         this.name = name;
     }
 
