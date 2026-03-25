@@ -32,7 +32,7 @@ public class MaintenceRecord {
         this.km = km;
     }
 
-    public Set<Part> setParts() {
+    public Set<Part> getParts() {
         return parts;
     }
 
