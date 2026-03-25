@@ -31,7 +31,7 @@ public class Part {
         this.usedPartsPrice = usedPartsPrice;
     }
 
-    public Set<MaintenceRecord> getRecords() {
+    public Set<MaintenceRecord> setRecords() {
         return records;
     }
 
