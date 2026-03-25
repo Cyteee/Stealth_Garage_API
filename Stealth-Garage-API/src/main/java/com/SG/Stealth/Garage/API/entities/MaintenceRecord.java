@@ -1,14 +1,12 @@
 package com.SG.Stealth.Garage.API.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "tb_maintence_record")
 public class MaintenceRecord {
 
     @Id
