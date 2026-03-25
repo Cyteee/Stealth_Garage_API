@@ -3,7 +3,9 @@ package com.SG.Stealth.Garage.API.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_maintence_record")
@@ -17,6 +19,10 @@ public class MaintenceRecord {
     private String description;
     private double km;
 
+    @ManyToMany
+    @JoinTable(name = "tb_maintence_record_part)", joinColumns = @JoinColumn(name = "maintence_record_id"), inverseJoinColumns = @JoinColumn(name = "part_id"))
+    private Set<Part> parts = new HashSet<>();
+
     public MaintenceRecord() {
     }
 
@@ -24,6 +30,10 @@ public class MaintenceRecord {
         this.date = date;
         this.description = description;
         this.km = km;
+    }
+
+    public Set<Part> getParts() {
+        return parts;
     }
 
     public Long getId() {
