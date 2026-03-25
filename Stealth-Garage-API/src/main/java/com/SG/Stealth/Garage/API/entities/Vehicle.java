@@ -15,16 +15,18 @@ public class Vehicle {
     private Long id;
 
     private String brand;
+    @Column(name = "vehicle_year")
     private int year;
-    private double licensePlate;
+    private String licensePlate;
 
-    @OneToMany(mappedBy = "client")
-    private List<Vehicle> vehicles = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
 
     public Vehicle() {
     }
 
-    public Vehicle(Long id, String brand, int year, double placa) {
+    public Vehicle(Long id, String brand, int year, String placa) {
         this.id = id;
         this.brand = brand;
         this.year = year;
@@ -51,11 +53,11 @@ public class Vehicle {
         this.year = year;
     }
 
-    public double getLicensePlate() {
+    public String getLicensePlate() {
         return licensePlate;
     }
 
-    public void setLicensePlate(double licensePlate) {
+    public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
 

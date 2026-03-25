@@ -2,6 +2,8 @@ package com.SG.Stealth.Garage.API.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,16 +14,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "client_id")
-    private User name;
+    private String name;
     private String email;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Vehicle> vehicles = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, User name, String email, String phoneNumber) {
+    public User(Long id, String name, String email, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -32,11 +35,11 @@ public class User {
         return id;
     }
 
-    public User getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(User name) {
+    public void setName(String name) {
         this.name = name;
     }
 
