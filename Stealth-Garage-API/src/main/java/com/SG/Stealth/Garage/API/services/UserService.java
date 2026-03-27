@@ -3,6 +3,7 @@ package com.SG.Stealth.Garage.API.services;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,21 @@ public class UserService {
 
     public User insert(User obj) {
         return repository.save(obj);
+    }
+
+    public User update(Long id, User obj){
+        try {
+            User entity = repository.getReferenceById(id);
+            updateData(entity, obj);
+            return repository.save(entity);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
+    }
+
+    public void updateData(User entity, User obj){
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhoneNumber(obj.getPhoneNumber());
     }
 }

@@ -1,8 +1,10 @@
 package com.SG.Stealth.Garage.API.services;
 
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
+import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,21 @@ public class VehicleService {
 
     public Vehicle insert(Vehicle obj){
         return repository.save(obj);
+    }
+
+    public Vehicle update(Long id, Vehicle obj){
+        try {
+            Vehicle entity = repository.getReferenceById(id);
+            updateData(entity, obj);
+            return repository.save(entity);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
+    }
+
+    public void updateData(Vehicle entity, Vehicle obj){
+        entity.setBrand(obj.getBrand());
+        entity.setYear(obj.getYear());
+        entity.setLicensePlate(obj.getLicensePlate());
     }
 }

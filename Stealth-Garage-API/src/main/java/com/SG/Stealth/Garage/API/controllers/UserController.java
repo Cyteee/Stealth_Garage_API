@@ -35,4 +35,10 @@ public class UserController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
+
+    @PutMapping
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj){
+        obj = userService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
 }

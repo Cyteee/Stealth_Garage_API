@@ -1,5 +1,6 @@
 package com.SG.Stealth.Garage.API.controllers;
 
+import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
 import com.SG.Stealth.Garage.API.services.VehicleService;
@@ -35,5 +36,11 @@ public class VehicleController {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
+    }
+
+    @PutMapping
+    public ResponseEntity<Vehicle> update(@PathVariable Long id, @RequestBody Vehicle obj){
+        obj = service.update(id, obj);
+        return ResponseEntity.ok().body(obj);
     }
 }
