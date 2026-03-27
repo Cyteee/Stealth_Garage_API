@@ -5,6 +5,8 @@ import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +45,15 @@ public class UserService {
         entity.setName(obj.getName());
         entity.setEmail(obj.getEmail());
         entity.setPhoneNumber(obj.getPhoneNumber());
+    }
+
+    public void delete(Long id){
+        try {
+            repository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException(e.getMessage());
+        }
     }
 }
