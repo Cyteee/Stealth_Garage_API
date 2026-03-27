@@ -2,6 +2,7 @@ package com.SG.Stealth.Garage.API.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.*;
 
 @Entity
@@ -12,7 +13,7 @@ public class MaintenceRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date date;
+    private Instant date;
     private String description;
     private double km;
 
@@ -23,7 +24,8 @@ public class MaintenceRecord {
     public MaintenceRecord() {
     }
 
-    public MaintenceRecord(Date date, String description, double km) {
+    public MaintenceRecord(Long Id, Instant date, String description, double km) {
+        this.id = id;
         this.date = date;
         this.description = description;
         this.km = km;
@@ -37,11 +39,11 @@ public class MaintenceRecord {
         return id;
     }
 
-    public Date getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 
