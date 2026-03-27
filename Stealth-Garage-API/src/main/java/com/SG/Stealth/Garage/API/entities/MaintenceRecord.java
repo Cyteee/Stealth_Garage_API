@@ -2,10 +2,7 @@ package com.SG.Stealth.Garage.API.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_maintence_record")
@@ -62,6 +59,13 @@ public class MaintenceRecord {
 
     public void setKm(double km) {
         this.km = km;
+    }
+
+    public double getTotal(){
+        double soma = 0.0;
+        for (Part p : parts){
+            soma += p.getUsedPartsPrice();
+        } return soma;
     }
 
     @Override
