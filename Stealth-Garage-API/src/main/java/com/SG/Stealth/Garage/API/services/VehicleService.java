@@ -2,7 +2,6 @@ package com.SG.Stealth.Garage.API.services;
 
 import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
-import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -44,7 +43,7 @@ public class VehicleService {
     }
 
     private void updateData(Vehicle entity, Vehicle obj){
-        entity.setBrand(obj.getBrand());
+        entity.setBrandAndName(obj.getBrandAndName());
         entity.setYear(obj.getYear());
         entity.setLicensePlate(obj.getLicensePlate());
     }

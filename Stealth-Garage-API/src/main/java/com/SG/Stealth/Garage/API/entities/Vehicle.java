@@ -2,8 +2,6 @@ package com.SG.Stealth.Garage.API.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,7 +12,7 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String brand;
+    private String brandAndName;
     @Column(name = "vehicle_year")
     private int year;
     private String licensePlate;
@@ -28,7 +26,7 @@ public class Vehicle {
 
     public Vehicle(Long id, String brand, int year, String placa, User owner) {
         this.id = id;
-        this.brand = brand;
+        this.brandAndName = brand;
         this.year = year;
         this.licensePlate = placa;
         this.owner = owner;
@@ -38,12 +36,12 @@ public class Vehicle {
         return id;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getBrandAndName() {
+        return brandAndName;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setBrandAndName(String brandAndName) {
+        this.brandAndName = brandAndName;
     }
 
     public int getYear() {
