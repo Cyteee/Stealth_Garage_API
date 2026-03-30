@@ -41,6 +41,7 @@ public class TestConfig implements CommandLineRunner {
 
         Vehicle v1 = new Vehicle(null, "Chevrolet Cobalt", 2012, "woe4d2043");
 
+        v1.setOwner(u1);
         vehicleRepository.saveAll(Arrays.asList(v1));
 
         Part p1 = new Part(null, "Estofado do banco dianteiro motorista", 530.00);
