@@ -35,23 +35,42 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception{
 
-        User u1 = new User(null, "Marcelo", "marceloodev@gmail.com", "42942345305");
+        User u1 = new User(null, "Marcelo", "marceloodev@gmail.com", "219240349503");
+        User u2 = new User(null, "Jose", "jose1923@hotmail.com", "14924030535");
+        User u3 = new User(null, "Isabella", "isaeebbela@outlook.com", "34924207483");
+        User u4 = new User(null, "Joao", "joaopamonha@gmail.com", "11930233024");
+        User u5 = new User(null, "Jose", "josepamonha@gmail.com", "11943049674");
 
-        userRepository.saveAll(Arrays.asList(u1));
+        userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
 
-        Vehicle v1 = new Vehicle(null, "Chevrolet Cobalt", 2012, "woe4d2043");
+        Vehicle v1 = new Vehicle(null, "Chevrolet Cobalt", 2012, "woe4d2043", u1);
+        Vehicle v2 = new Vehicle(null, "Toyota Corolla", 2026, "woe4g20", u1);
+        Vehicle v3 = new Vehicle(null, "Volkswagen Polo", 2008, "rwe4o05", u2);
+        Vehicle v4 = new Vehicle(null, "Honda Civic", 2010, "ops5v02", u3);
+        Vehicle v5 = new Vehicle(null, "Fiat Uno Mill", 2013, "dve1e03", u4);
+        Vehicle v6 = new Vehicle(null, "Hyundai Creta", 2018, "hbt0g52", u5);
 
-        v1.setOwner(u1);
-        vehicleRepository.saveAll(Arrays.asList(v1));
+        vehicleRepository.saveAll(Arrays.asList(v1, v2, v3, v4, v5, v6));
 
         Part p1 = new Part(null, "Estofado do banco dianteiro motorista", 530.00);
+        Part p2 = new Part(null, "Macaneta das quatro portas", 698.00);
+        Part p3 = new Part(null, "Duas lanternas dianteiras", 4200.00);
+        Part p4 = new Part(null, "Motor completo", 9680.00);
+        Part p5 = new Part(null, "Porta traseira esquerda", 790.00);
 
-        partRepository.saveAll(Arrays.asList(p1));
 
-        MaintenceRecord mR1 = new MaintenceRecord(null, Instant.parse("2026-03-27T10:00:00Z"), "Troca do estofado do banco dianteiro motorista", 700.00);
+        partRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 
-        mR1.getParts().add(p1);
+        MaintenceRecord mR1 = new MaintenceRecord(null, Instant.parse("2026-03-27T10:31:35Z"), "Troca do estofado do banco dianteiro motorista", 198654.00);
+        MaintenceRecord mR2 = new MaintenceRecord(null, Instant.parse("2026-01-09T12:26:13Z"), "Troca de duas lanternas dianteiras", 9846.00);
+        MaintenceRecord mR3 = new MaintenceRecord(null, Instant.parse("2026-03-27T13:40:53Z"), "Troca do motor completo", 214654.00);
+        MaintenceRecord mR4 = new MaintenceRecord(null, Instant.parse("2026-03-27T08:46:43Z"), "Troca da porta traseira esquerda", 148654.00);
 
-        maintenceRecordRepository.saveAll(Arrays.asList(mR1));
+        mR1.getParts().addAll(Arrays.asList(p1, p2));
+        mR2.getParts().add(p3);
+        mR3.getParts().add(p4);
+        mR4.getParts().add(p5);
+
+        maintenceRecordRepository.saveAll(Arrays.asList(mR1, mR2, mR3, mR4));
     }
 }

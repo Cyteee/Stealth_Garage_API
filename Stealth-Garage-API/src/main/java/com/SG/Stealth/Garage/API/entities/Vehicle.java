@@ -26,11 +26,12 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(Long id, String brand, int year, String placa) {
+    public Vehicle(Long id, String brand, int year, String placa, User owner) {
         this.id = id;
         this.brand = brand;
         this.year = year;
         this.licensePlate = placa;
+        this.owner = owner;
     }
 
     public Long getId() {
