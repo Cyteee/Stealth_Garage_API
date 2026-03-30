@@ -59,9 +59,9 @@ public class TestConfig implements CommandLineRunner {
         Part p5 = new Part(null, "Porta traseira esquerda", 790.00);
 
 
-        partRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
+        partRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
-        MaintenceRecord mR1 = new MaintenceRecord(null, Instant.parse("2026-03-27T10:31:35Z"), "Troca do estofado do banco dianteiro motorista", 198654.00);
+        MaintenceRecord mR1 = new MaintenceRecord(null, Instant.parse("2026-03-27T10:31:35Z"), "Troca do estofado do banco dianteiro motorista, troca das macanetas das quatro portas", 198654.00);
         MaintenceRecord mR2 = new MaintenceRecord(null, Instant.parse("2026-01-09T12:26:13Z"), "Troca de duas lanternas dianteiras", 9846.00);
         MaintenceRecord mR3 = new MaintenceRecord(null, Instant.parse("2026-03-27T13:40:53Z"), "Troca do motor completo", 214654.00);
         MaintenceRecord mR4 = new MaintenceRecord(null, Instant.parse("2026-03-27T08:46:43Z"), "Troca da porta traseira esquerda", 148654.00);
