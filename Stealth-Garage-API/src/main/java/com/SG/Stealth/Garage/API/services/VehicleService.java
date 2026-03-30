@@ -1,5 +1,6 @@
 package com.SG.Stealth.Garage.API.services;
 
+import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
@@ -42,7 +43,7 @@ public class VehicleService {
         }
     }
 
-    public void updateData(Vehicle entity, Vehicle obj){
+    private void updateData(Vehicle entity, Vehicle obj){
         entity.setBrand(obj.getBrand());
         entity.setYear(obj.getYear());
         entity.setLicensePlate(obj.getLicensePlate());
@@ -54,7 +55,7 @@ public class VehicleService {
         }catch (EmptyResultDataAccessException e){
             throw new ResourceNotFoundException(id);
         }catch (DataIntegrityViolationException e){
-            throw new DataIntegrityViolationException(e.getMessage());
+            throw new DatabaseException(e.getMessage());
         }
     }
 }

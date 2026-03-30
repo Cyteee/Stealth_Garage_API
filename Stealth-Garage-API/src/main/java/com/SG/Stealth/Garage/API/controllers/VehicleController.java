@@ -38,7 +38,7 @@ public class VehicleController {
         return ResponseEntity.created(uri).body(obj);
     }
 
-    @PutMapping
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Vehicle> update(@PathVariable Long id, @RequestBody Vehicle obj){
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);

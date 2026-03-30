@@ -35,11 +35,11 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception{
 
-        User u1 = new User(null, "Paulo", "pauloplinio2020@gmail.com", "42942345305");
+        User u1 = new User(null, "Marcelo", "marceloodev@gmail.com", "42942345305");
 
         userRepository.saveAll(Arrays.asList(u1));
 
-        Vehicle v1 = new Vehicle(null, "Chevrolet", 2012, "woe4d2043");
+        Vehicle v1 = new Vehicle(null, "Chevrolet Cobalt", 2012, "woe4d2043");
 
         vehicleRepository.saveAll(Arrays.asList(v1));
 

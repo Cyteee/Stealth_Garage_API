@@ -1,5 +1,6 @@
 package com.SG.Stealth.Garage.API.services;
 
+import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
@@ -41,7 +42,7 @@ public class UserService {
         }
     }
 
-    public void updateData(User entity, User obj){
+    private void updateData(User entity, User obj){
         entity.setName(obj.getName());
         entity.setEmail(obj.getEmail());
         entity.setPhoneNumber(obj.getPhoneNumber());
@@ -53,7 +54,7 @@ public class UserService {
         }catch (EmptyResultDataAccessException e){
             throw new ResourceNotFoundException(id);
         }catch (DataIntegrityViolationException e){
-            throw new DataIntegrityViolationException(e.getMessage());
+            throw new DatabaseException(e.getMessage());
         }
     }
 }
