@@ -57,3 +57,27 @@ http://localhost:8080/users/1 (So sera deletado se nao houver veiculo vinculado 
 
 http://localhost:8080/vehicles/1
 
+Como executar ela (Rodando o projeto em seu computador):
+
+Certifique-se de ter o Java e o Git instalados em seu computador
+Abra o terminal e clone esse repositorio:
+
+git clone [https://github.com/(Aqui-fica-seu-usuario)/Stealth-Garage-API.git](https://github.com/SEU-USUARIO/Stealth-Garage-API.git)
+
+Abra sua IDE
+
+Aguarde o Maven baixar toda dependencias necessarias
+
+Execute o StealthGarageApiApplication.java
+
+Acesse o H2 e cole este link: http://localhost:8080/h2-console
+
+Configure ele dessa forma:
+
+JDBC URL: jdbc:h2:mem:testdb
+
+User Name: sa
+
+Password: (Nao digite nada)
+
+Clique em Connect e explore a APIRESTful 
