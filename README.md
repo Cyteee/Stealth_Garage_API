@@ -7,40 +7,53 @@ Abaixo segue exemplos de requisicoes que poderao ser utilizadas:
 Metodo GET:
 
 http://localhost:8080/vehicles
+
 http://localhost:8080/users
+
 http://localhost:8080/vehicles/1
+
 http://localhost:8080/users/1
 
 Metodo POST:
 
 {
+
     "name": "Romario Muniz",
     "email": "romariozinho204@gmail.com",
     "phoneNumber": "1199546359"
+	
 }
 
 {
+
 		"brand": "Chevrolet Cobalt",
 		"year": 2020,
 		"licensePlate": "woe4d2043"
-	}
+		
+}
 
   Metodo PUT:
 
   {
+  
 		"id": 1,
 		"brand": "Chevrolet Cobalt",
 		"year": 2026,
 		"licensePlate": "oep3g93"
-	}
+		
+}
 
   {
+  
     "name": "Romario Marques",
     "email": "romariozinhomarques2024@gmail.com",
     "phoneNumber": "11995435359"
+
 }
 
 Metodo DELETE:
 
 http://localhost:8080/users/1 (So sera deletado se nao houver veiculo vinculado a ele)
+
 http://localhost:8080/vehicles/1
+
