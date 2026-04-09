@@ -1,10 +1,7 @@
 package com.SG.Stealth.Garage.API.controllers;
 
-import com.SG.Stealth.Garage.API.DTO.UserDTO;
 import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
-import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
-import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
 import com.SG.Stealth.Garage.API.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,40 +17,40 @@ import java.util.stream.Collectors;
 public class VehicleController {
 
     @Autowired
-    private VehicleService service;
+    private VehicleService vehicleService;
 
     @GetMapping
     public ResponseEntity<List<VehicleDTO>> findAll(){
-        List<Vehicle> list = service.findAll();
+        List<Vehicle> list = vehicleService.findAll();
         List<VehicleDTO> listDto = list.stream().map(x -> new VehicleDTO(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<VehicleDTO> findById(@PathVariable Long id){
-        Vehicle obj = service.findById(id);
+        Vehicle obj = vehicleService.findById(id);
         return ResponseEntity.ok().body(new VehicleDTO(obj));
     }
 
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody VehicleDTO objDto){
-        Vehicle obj = userService.fromDTO(objDto);
-        obj = service.insert(obj);
+        Vehicle obj = vehicleService.fromDTO(objDto);
+        obj = vehicleService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody VehicleDTO objDto){
-        Vehicle obj = service.fromDTO(objDto);
+        Vehicle obj = vehicleService.fromDTO(objDto);
         obj.setId(id);
-        obj = service.update(id, obj);
+        obj = vehicleService.update(id, obj);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        service.delete(id);
+        vehicleService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
