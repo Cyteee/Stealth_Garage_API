@@ -1,7 +1,9 @@
 package com.SG.Stealth.Garage.API.services;
 
+import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
 import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
+import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -56,5 +58,22 @@ public class VehicleService {
         }catch (DataIntegrityViolationException e){
             throw new DatabaseException(e.getMessage());
         }
+    }
+
+    public Vehicle fromDTO(VehicleDTO objDto){
+        User owner = new User(
+                objDto.getOwner().getId(),
+                objDto.getOwner().getName(),
+                objDto.getOwner().getEmail(),
+                objDto.getOwner().getPhoneNumber()
+                );
+        return  new Vehicle(
+
+                objDto.getId(),
+                objDto.getBrandAndName(),
+                objDto.getYear(),
+                objDto.getLicensePlate(),
+                owner
+        );
     }
 }

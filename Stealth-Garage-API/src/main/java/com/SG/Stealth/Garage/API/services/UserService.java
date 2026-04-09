@@ -1,8 +1,11 @@
 package com.SG.Stealth.Garage.API.services;
 
+import com.SG.Stealth.Garage.API.DTO.UserDTO;
+import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
 import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.User;
+import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +59,14 @@ public class UserService {
         }catch (DataIntegrityViolationException e){
             throw new DatabaseException(e.getMessage());
         }
+    }
+
+    public User fromDTO(UserDTO objDto){
+        return  new User(
+                objDto.getId(),
+                objDto.getName(),
+                objDto.getEmail(),
+                objDto.getPhoneNumber()
+        );
     }
 }
