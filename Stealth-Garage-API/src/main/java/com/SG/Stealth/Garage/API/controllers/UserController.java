@@ -45,7 +45,7 @@ public class UserController {
         User obj = userService.fromDTO(objDto);
         obj.setId(id);
         obj = userService.update(id, obj);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{id}")
