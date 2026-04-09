@@ -30,7 +30,10 @@ public class VehicleDTO implements Serializable {
         brandAndName = obj.getBrandAndName();
         year = obj.getYear();
         licensePlate = obj.getLicensePlate();
-        owner = new UserDTO(obj.getOwner());
+
+        if (obj.getOwner() != null){
+            owner = new UserDTO(obj.getOwner());
+        }
     }
 
     public Long getId() {
