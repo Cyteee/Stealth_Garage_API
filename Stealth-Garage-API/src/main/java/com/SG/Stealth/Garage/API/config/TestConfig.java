@@ -47,7 +47,7 @@ public class TestConfig implements CommandLineRunner {
         Vehicle v2 = new Vehicle(null, "Toyota Corolla", 2026, "woe4g20", u1);
         Vehicle v3 = new Vehicle(null, "Volkswagen Polo", 2008, "rwe4o05", u2);
         Vehicle v4 = new Vehicle(null, "Honda Civic", 2010, "ops5v02", u3);
-        Vehicle v5 = new Vehicle(null, "Fiat Uno Mill", 2013, "dve1e03", u4);
+        Vehicle v5 = new Vehicle(null, "Fiat Uno Mille", 2013, "dve1e03", u4);
         Vehicle v6 = new Vehicle(null, "Hyundai Creta", 2018, "hbt0g52", u5);
 
         vehicleRepository.saveAll(Arrays.asList(v1, v2, v3, v4, v5, v6));
