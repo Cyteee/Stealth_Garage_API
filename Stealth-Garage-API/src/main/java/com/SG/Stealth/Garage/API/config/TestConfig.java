@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -32,14 +33,17 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private MaintenceRecordRepository maintenceRecordRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void run(String... args) throws Exception{
 
-        User u1 = new User(null, "Marcelo", "marceloodev@gmail.com", "219240349503");
-        User u2 = new User(null, "Jose", "jose1923@hotmail.com", "14924030535");
-        User u3 = new User(null, "Isabella", "isaeebbela@outlook.com", "34924207483");
-        User u4 = new User(null, "Joao", "joaopamonha@gmail.com", "11930233024");
-        User u5 = new User(null, "Jose", "josepamonha@gmail.com", "11943049674");
+        User u1 = new User(null, "Marcelo", "marceloodev@gmail.com", "219240349503", passwordEncoder.encode("123456"));
+        User u2 = new User(null, "Jose", "jose1923@hotmail.com", "14924030535", passwordEncoder.encode("123456"));
+        User u3 = new User(null, "Isabella", "isaeebbela@outlook.com", "34924207483", passwordEncoder.encode("123456"));
+        User u4 = new User(null, "Joao", "joaopamonha@gmail.com", "11930233024", passwordEncoder.encode("123456"));
+        User u5 = new User(null, "Jose", "josepamonha@gmail.com", "11943049674", passwordEncoder.encode("123456"));
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
 

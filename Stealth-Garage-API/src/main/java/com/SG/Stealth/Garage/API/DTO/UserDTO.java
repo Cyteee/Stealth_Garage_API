@@ -19,11 +19,12 @@ public class UserDTO implements Serializable {
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String name, String email, String phoneNumber) {
+    public UserDTO(Long id, String name, String email, String phoneNumber, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
     public UserDTO(User obj){
