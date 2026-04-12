@@ -17,6 +17,7 @@ public class User {
     private String name;
     private String email;
     private String phoneNumber;
+    private String password;
 
     @OneToMany(mappedBy = "owner")
     private List<Vehicle> vehicles = new ArrayList<>();
@@ -24,11 +25,12 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String phoneNumber) {
+    public User(Long id, String name, String email, String phoneNumber, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
     public Long getId() {
@@ -61,6 +63,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
