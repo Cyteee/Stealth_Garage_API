@@ -71,7 +71,8 @@ public class UserService {
                 objDto.getId(),
                 objDto.getName(),
                 objDto.getEmail(),
-                objDto.getPhoneNumber()
+                objDto.getPhoneNumber(),
+                objDto.getPassword()
         );
     }
 }

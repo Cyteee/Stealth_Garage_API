@@ -1,6 +1,7 @@
 package com.SG.Stealth.Garage.API.DTO;
 
 import com.SG.Stealth.Garage.API.entities.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
@@ -11,6 +12,9 @@ public class UserDTO implements Serializable {
     private String name;
     private String email;
     private String phoneNumber;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
     public UserDTO() {
     }
@@ -59,5 +63,13 @@ public class UserDTO implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
