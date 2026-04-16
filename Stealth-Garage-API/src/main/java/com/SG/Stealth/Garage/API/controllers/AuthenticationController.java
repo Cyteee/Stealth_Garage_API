@@ -1,7 +1,10 @@
 package com.SG.Stealth.Garage.API.controllers;
 
+import com.SG.Stealth.Garage.API.DTO.AuthenticationDTO;
+import com.SG.Stealth.Garage.API.DTO.LoginResponseDTO;
 import com.SG.Stealth.Garage.API.config.security.TokenService;
 import com.SG.Stealth.Garage.API.entities.User;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
