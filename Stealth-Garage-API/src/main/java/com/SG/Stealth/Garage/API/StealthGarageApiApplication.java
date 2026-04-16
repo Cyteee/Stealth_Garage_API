@@ -9,5 +9,4 @@ public class StealthGarageApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StealthGarageApiApplication.class, args);
 	}
-
 }
