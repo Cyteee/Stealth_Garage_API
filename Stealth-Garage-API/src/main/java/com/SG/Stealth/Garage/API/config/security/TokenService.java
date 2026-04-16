@@ -11,8 +11,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-import static org.springframework.security.config.Elements.JWT;
-
 @Service
 public class TokenService {
 
@@ -24,11 +22,24 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("stealth_garage_api")
-                    .withSubject(user.getLogin())
+                    .withSubject(user.getEmail())
                     .withExpiresAt(dateExpiration())
                     .sign(algorithm);
         } catch (JWTCreationException e){
             throw new RuntimeException("Erro ao gerar token JWT ", e);
+        }
+    }
+
+    public String validateToken(String token){
+        try {
+            com.auth0.jwt.algorithms.Algorithm algorithm = com.auth0.jwt.algorithms.Algorithm.HMAC256(secret);
+            return com.auth0.jwt.JWT.require(algorithm)
+                    .withIssuer("stealth-garage-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        } catch (com.auth0.jwt.exceptions.JWTVerificationException exception){
+            return "";
         }
     }
 
