@@ -21,7 +21,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
-                    .withIssuer("stealth_garage_api")
+                    .withIssuer("stealth-garage-api")
                     .withSubject(user.getEmail())
                     .withExpiresAt(dateExpiration())
                     .sign(algorithm);
