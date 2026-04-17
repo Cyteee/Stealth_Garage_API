@@ -5,12 +5,16 @@ Seja bem vindo a minha API Rest sobre minha Garagem Discreta, ou Stealth Garage,
 A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
 
 ### 1 Obtencao de tokens (login):
+
 METODO POST. http://localhost:8080/auth/login ou acesso na nuvem: https://stealthgarageapi-production.up.railway.app/auth/login
+
 Body:
 
 {
+
     "login": "SEU-EMAIL@gmail.com",
     "password": "SUA-SENHA"
+	
 }
 
 utilize o Token gerado no console, e coloque ele no Auth, selecione Bearer Token e cole o token la dentro, assim, o seu acesso esta autorizado pelo tempo de 2 horas.
