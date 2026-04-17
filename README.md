@@ -26,7 +26,7 @@ Metodo POST:
 
 {
 
-		"brand": "Chevrolet Cobalt",
+		"brandAndName": "Chevrolet Cobalt",
 		"year": 2020,
 		"licensePlate": "woe4d2043"
 		
