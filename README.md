@@ -2,6 +2,23 @@
 
 Seja bem vindo a minha API Rest sobre minha Garagem Discreta, ou Stealth Garage, ela e uma API feita para armazenar dados dos clientes, sendo eles nome, email, numero de telefone e automaticamente o ID de cada cliente em ordem de chegada, apos a etapa dos dados de nossos clientes, temos os dados dos veiculos cadastrados, constando em nosso sistema a marca do veiculo, o nome do veiculo, o ano do veiculo e a placa do veiculo, com esses dois tipos de dados em maos, podemos vincular o usuario, com o veiculo, assim temos a logica de um para muitos, um usuario pode ter muitos veiculos, cada usuario pode ter quantos veiculos quiser, e eles serao vinculados a este dono. O proximo mecanico da minha APIRESTful e o de pecas e o registro de manutencao, cada peca tem seu ID, nome, preco e cada registro de manutencao tem seu ID, data da manutencao, nome do que foi feito e o KM do carro no momento da manutencao, assim podemos vincular cada peca, com o registro da manutencao e com o veiculo que foi feito o reparo. Em meu CRUD, podemos puxar todos dados sobre os usuarios, veiculos e por ID de cada usuario ou veiculo, podemos adicionar usuarios e veiculos, atualizar dados sobre usuarios e veiculos e deletar veiculos e usuarios, nesta sequencia, de filho para pai, esta restrito delecao de pai antes do filho, no caso, esta restrito delecao de usuario que possui um veiculo vinculado em seu nome. Toda APIRESTful foi feita em Java, Springboot, JPA/Hibernate, podendo ser executado pelo Springboot e utilizada no H2 na memoria local do computador do usuario (momentaneamente), e realizar o CRUD pelo Insominia, Postman, Bruno, Thunder Client, Apidog, HTTPie, Hoppscotch e Restfox (testamos ele pelo Insominia e H2).
 
+A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
+
+### 1 Obtencao de tokens (login):
+
+METODO POST. http://localhost:8080/auth/login ou acesso na nuvem: https://stealthgarageapi-production.up.railway.app/auth/login
+
+Body:
+
+{
+
+    "login": "SEU-EMAIL@gmail.com",
+    "password": "SUA-SENHA"
+	
+}
+
+utilize o Token gerado no console, e coloque ele no Auth, selecione Bearer Token e cole o token la dentro, assim, o seu acesso esta autorizado pelo tempo de 2 horas.
+
 Abaixo segue exemplos de requisicoes que poderao ser utilizadas:
 
 Metodo GET:
@@ -37,7 +54,7 @@ Metodo POST:
   {
   
 		"id": 1,
-		"brand": "Chevrolet Cobalt",
+		"brandAndName": "Chevrolet Cobalt",
 		"year": 2026,
 		"licensePlate": "oep3g93"
 		
