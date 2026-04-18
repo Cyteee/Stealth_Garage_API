@@ -1,6 +1,5 @@
 package com.SG.Stealth.Garage.API.services;
 
-import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.Mockito;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.springframework.dao.EmptyResultDataAccessException;
 
+import java.util.EmptyStackException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,13 +26,13 @@ public class VehicleServiceTest {
     private VehicleService vehicleService;
 
     @Test
-    void deveLancarExcecaoQuandoVeiculoNaoEncontrado(){
-        Long idInexistente = 99L;
+    void deveLancarExcecaoAoDeletarVeiculoNaoEncontrado(){
+        Long idInexistente = 2L;
 
-        Mockito.when(vehicleRepository.findById(idInexistente)).thenReturn(Optional.empty());
+        Mockito.doThrow(EmptyResultDataAccessException.class).when(vehicleRepository).deleteById(idInexistente);
 
         org.junit.jupiter.api.Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-            vehicleService.findById(idInexistente);
-        }, "Deveria lancar uma excecao informando que o veiculo nao foi encontrado");
+            vehicleService.delete(idInexistente);
+        }, "Deveria lancar uma excecao informando que o veiculo nao foi deletado");
     }
 }
