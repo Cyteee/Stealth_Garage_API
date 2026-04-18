@@ -1,6 +1,7 @@
 package com.SG.Stealth.Garage.API.services;
 
-import com.SG.Stealth.Garage.API.entities.Vehicle;
+import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
+import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -24,17 +25,13 @@ public class VehicleServiceTest {
     private VehicleService vehicleService;
 
     @Test
-    void encotrarVeiculoPorId(){
-        Vehicle veiculoFalso = new Vehicle();
-        veiculoFalso.setId(1L);
-        veiculoFalso.setBrandAndName("Toyota Corolla");
+    void deveLancarExcecaoQuandoVeiculoNaoEncontrado(){
+        Long idInexistente = 99L;
 
-        Mockito.when(vehicleRepository.findById(1L)).thenReturn(Optional.of(veiculoFalso));
+        Mockito.when(vehicleRepository.findById(idInexistente)).thenReturn(Optional.empty());
 
-        Vehicle veiculoEncontrado = vehicleService.findById(1L);
-
-        assertNotNull(veiculoEncontrado, "O veiculo nao deveria ser nulo");
-        assertEquals("Toyota Corolla", veiculoEncontrado.getBrandAndName());
-        assertEquals(1L, veiculoEncontrado.getId());
+        org.junit.jupiter.api.Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            vehicleService.findById(idInexistente);
+        }, "Deveria lancar uma excecao informando que o veiculo nao foi encontrado");
     }
 }
