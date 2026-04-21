@@ -1,7 +1,6 @@
 package com.SG.Stealth.Garage.API.services;
 
 import com.SG.Stealth.Garage.API.entities.User;
-import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
-public class VehicleServiceTest {
+public class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
@@ -23,7 +22,7 @@ public class VehicleServiceTest {
     private UserService userService;
 
     @Test
-    void deveAtualizarUmVeiculo(){
+    void deveAtualizarUmUsuario(){
         Long idDoUsuario = 1L;
 
         User usuarioVelho = new User();
