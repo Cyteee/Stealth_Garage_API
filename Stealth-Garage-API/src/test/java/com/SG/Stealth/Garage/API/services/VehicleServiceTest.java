@@ -22,22 +22,26 @@ public class VehicleServiceTest {
     private VehicleService vehicleService;
 
     @Test
-    void deveInserirUmVeiculo(){
-        Vehicle veiculoParaSalvar = new Vehicle();
-        veiculoParaSalvar.setBrandAndName("Toyota Hilux");
-        veiculoParaSalvar.setYear(1999);
+    void deveAtualizarUmVeiculo(){
+        Long idDoCarro = 1L;
 
-        Vehicle veiculoRetornoDoBanco = new Vehicle();
-        veiculoRetornoDoBanco.setId(5L);
-        veiculoRetornoDoBanco.setBrandAndName("Toyota Hilux");
-        veiculoRetornoDoBanco.setYear(1999);
+        Vehicle veiculoAntigoNoBanco = new Vehicle();
+        veiculoAntigoNoBanco.setId(idDoCarro);
+        veiculoAntigoNoBanco.setBrandAndName("Corsa Wind");
+        veiculoAntigoNoBanco.setYear(1996);
 
-        Mockito.when(vehicleRepository.save(Mockito.any(Vehicle.class))).thenReturn(veiculoRetornoDoBanco);
+        Vehicle dadosNovosDaRequisicao = new Vehicle();
+        dadosNovosDaRequisicao.setBrandAndName("Corsa Wind Rebaixado");
+        dadosNovosDaRequisicao.setYear(1998);
 
-        Vehicle resultado = vehicleService.insert(veiculoParaSalvar);
+        Mockito.when(vehicleRepository.getReferenceById(idDoCarro)).thenReturn(veiculoAntigoNoBanco);
 
-        assertNotNull(resultado.getId(), "O ID não deveria ser nulo, provando que passou pelo banco falso");
-        assertEquals(5L, resultado.getId());
-        assertEquals("Toyota Hilux", resultado.getBrandAndName());
+        Mockito.when(vehicleRepository.save(veiculoAntigoNoBanco)).thenReturn(veiculoAntigoNoBanco);
+
+        Vehicle resultado = vehicleService.update(idDoCarro, dadosNovosDaRequisicao);
+
+        assertEquals(1L, resultado.getId());
+        assertEquals("Corsa Wind Rebaixado", resultado.getBrandAndName());
+        assertEquals(1998, resultado.getYear());
     }
 }
