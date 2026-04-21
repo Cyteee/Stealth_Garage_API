@@ -1,7 +1,8 @@
 package com.SG.Stealth.Garage.API.services;
 
+import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
-import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
+import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -16,32 +17,32 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class VehicleServiceTest {
 
     @Mock
-    private VehicleRepository vehicleRepository;
+    private UserRepository userRepository;
 
     @InjectMocks
-    private VehicleService vehicleService;
+    private UserService userService;
 
     @Test
     void deveAtualizarUmVeiculo(){
-        Long idDoCarro = 1L;
+        Long idDoUsuario = 1L;
 
-        Vehicle veiculoAntigoNoBanco = new Vehicle();
-        veiculoAntigoNoBanco.setId(idDoCarro);
-        veiculoAntigoNoBanco.setBrandAndName("Corsa Wind");
-        veiculoAntigoNoBanco.setYear(1996);
+        User usuarioVelho = new User();
+        usuarioVelho.setId(idDoUsuario);
+        usuarioVelho.setName("Ozias Souza");
+        usuarioVelho.setPhoneNumber("11995862658");
 
-        Vehicle dadosNovosDaRequisicao = new Vehicle();
-        dadosNovosDaRequisicao.setBrandAndName("Corsa Wind Rebaixado");
-        dadosNovosDaRequisicao.setYear(1998);
+        User dadosNovosDaRequisicao = new User();
+        dadosNovosDaRequisicao.setName("Osias Souza");
+        dadosNovosDaRequisicao.setPhoneNumber("11985684983");
 
-        Mockito.when(vehicleRepository.getReferenceById(idDoCarro)).thenReturn(veiculoAntigoNoBanco);
+        Mockito.when(userRepository.getReferenceById(idDoUsuario)).thenReturn(usuarioVelho);
 
-        Mockito.when(vehicleRepository.save(veiculoAntigoNoBanco)).thenReturn(veiculoAntigoNoBanco);
+        Mockito.when(userRepository.save(usuarioVelho)).thenReturn(usuarioVelho);
 
-        Vehicle resultado = vehicleService.update(idDoCarro, dadosNovosDaRequisicao);
+        User resultado = userService.update(idDoUsuario, dadosNovosDaRequisicao);
 
         assertEquals(1L, resultado.getId());
-        assertEquals("Corsa Wind Rebaixado", resultado.getBrandAndName());
-        assertEquals(1998, resultado.getYear());
+        assertEquals("Osias Souza", resultado.getName());
+        assertEquals("11985684983", resultado.getPhoneNumber());
     }
 }
