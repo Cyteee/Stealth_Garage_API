@@ -25,19 +25,19 @@ public class VehicleServiceTest {
     void deveInserirUmVeiculo(){
         Vehicle veiculoParaSalvar = new Vehicle();
         veiculoParaSalvar.setBrandAndName("Toyota Hilux");
-        veiculoParaSalvar.setYear(1996);
+        veiculoParaSalvar.setYear(1999);
 
         Vehicle veiculoRetornoDoBanco = new Vehicle();
-        veiculoRetornoDoBanco.setId(14L);
+        veiculoRetornoDoBanco.setId(5L);
         veiculoRetornoDoBanco.setBrandAndName("Toyota Hilux");
-        veiculoRetornoDoBanco.setYear(1996);
+        veiculoRetornoDoBanco.setYear(1999);
 
         Mockito.when(vehicleRepository.save(Mockito.any(Vehicle.class))).thenReturn(veiculoRetornoDoBanco);
 
         Vehicle resultado = vehicleService.insert(veiculoParaSalvar);
 
         assertNotNull(resultado.getId(), "O ID não deveria ser nulo, provando que passou pelo banco falso");
-        assertEquals(14L, resultado.getId());
+        assertEquals(5L, resultado.getId());
         assertEquals("Toyota Hilux", resultado.getBrandAndName());
     }
 }
