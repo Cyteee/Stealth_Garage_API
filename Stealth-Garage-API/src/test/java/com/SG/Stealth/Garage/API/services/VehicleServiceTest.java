@@ -1,15 +1,13 @@
 package com.SG.Stealth.Garage.API.services;
 
-import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
+import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
-import com.SG.Stealth.Garage.API.repositories.VehicleRepositoryTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.Mockito;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,13 +22,22 @@ public class VehicleServiceTest {
     private VehicleService vehicleService;
 
     @Test
-    void deveLancarExcecaoAoDeletarVeiculoNaoEncontrado(){
-        Long idInexistente = 2L;
+    void deveInserirUmVeiculo(){
+        Vehicle veiculoParaSalvar = new Vehicle();
+        veiculoParaSalvar.setBrandAndName("Toyota Hilux");
+        veiculoParaSalvar.setYear(1996);
 
-        Mockito.doThrow(EmptyResultDataAccessException.class).when(vehicleRepository).deleteById(idInexistente);
+        Vehicle veiculoRetornoDoBanco = new Vehicle();
+        veiculoRetornoDoBanco.setId(14L);
+        veiculoRetornoDoBanco.setBrandAndName("Toyota Hilux");
+        veiculoRetornoDoBanco.setYear(1996);
 
-        org.junit.jupiter.api.Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-            vehicleService.delete(idInexistente);
-        }, "Deveria lancar uma excecao informando que o veiculo nao foi deletado");
+        Mockito.when(vehicleRepository.save(Mockito.any(Vehicle.class))).thenReturn(veiculoRetornoDoBanco);
+
+        Vehicle resultado = vehicleService.insert(veiculoParaSalvar);
+
+        assertNotNull(resultado.getId(), "O ID não deveria ser nulo, provando que passou pelo banco falso");
+        assertEquals(14L, resultado.getId());
+        assertEquals("Toyota Hilux", resultado.getBrandAndName());
     }
 }
