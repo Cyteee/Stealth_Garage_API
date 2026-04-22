@@ -46,4 +46,17 @@ public class VehicleControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(idBuscado))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.brandAndName").value("Fiat Marea"));
     }
+
+    @Test
+    void deveRetornarStatus400QuanVeiculoNaoExistir() throws Exception{
+        Long idInexistente = 83L;
+
+        Mockito.when(vehicleService.findById(idInexistente))
+                .thenThrow(new RuntimeException("Veiculo nao encontrado"));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("Vehicles/{id}", idInexistente)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+
+    }
 }
