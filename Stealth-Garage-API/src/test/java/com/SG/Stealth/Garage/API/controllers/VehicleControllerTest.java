@@ -2,6 +2,7 @@ package com.SG.Stealth.Garage.API.controllers;
 
 import com.SG.Stealth.Garage.API.config.security.TokenService;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
+import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import com.SG.Stealth.Garage.API.services.UserService;
 import com.SG.Stealth.Garage.API.services.VehicleService;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class VehicleControllerTest {
     private TokenService tokenService;
 
     @MockitoBean
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Test
     void deveRetornarVeiculoPeloIdcomStatus200() throws Exception{
