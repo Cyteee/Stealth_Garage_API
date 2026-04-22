@@ -1,15 +1,18 @@
 ## Stealth Garage API
 
-Seja bem vindo a minha API Rest sobre minha Garagem Discreta, ou Stealth Garage, ela e uma API feita para armazenar dados dos clientes, sendo eles nome, email, numero de telefone e automaticamente o ID de cada cliente em ordem de chegada, apos a etapa dos dados de nossos clientes, temos os dados dos veiculos cadastrados, constando em nosso sistema a marca do veiculo, o nome do veiculo, o ano do veiculo e a placa do veiculo, com esses dois tipos de dados em maos, podemos vincular o usuario, com o veiculo, assim temos a logica de um para muitos, um usuario pode ter muitos veiculos, cada usuario pode ter quantos veiculos quiser, e eles serao vinculados a este dono. O proximo mecanico da minha APIRESTful e o de pecas e o registro de manutencao, cada peca tem seu ID, nome, preco e cada registro de manutencao tem seu ID, data da manutencao, nome do que foi feito e o KM do carro no momento da manutencao, assim podemos vincular cada peca, com o registro da manutencao e com o veiculo que foi feito o reparo. Em meu CRUD, podemos puxar todos dados sobre os usuarios, veiculos e por ID de cada usuario ou veiculo, podemos adicionar usuarios e veiculos, atualizar dados sobre usuarios e veiculos e deletar veiculos e usuarios, nesta sequencia, de filho para pai, esta restrito delecao de pai antes do filho, no caso, esta restrito delecao de usuario que possui um veiculo vinculado em seu nome. Toda APIRESTful foi feita em Java, Springboot, JPA/Hibernate, podendo ser executado pelo Springboot e utilizada no H2 na memoria local do computador do usuario (momentaneamente), e realizar o CRUD pelo Insominia, Postman, Bruno, Thunder Client, Apidog, HTTPie, Hoppscotch e Restfox (testamos ele pelo Insominia e H2).
+A Stealth Garage API é uma API REST para gerenciamento de uma garagem: clientes, veículos, peças e registros de manutenção.
+Cada cliente tem nome, e-mail e telefone. Cada veículo tem marca, nome, ano e placa — e fica vinculado a um dono. A relação é um para muitos: um cliente pode ter quantos veículos quiser.
+Os registros de manutenção guardam data, descrição do serviço e KM do veículo no momento do reparo. Cada registro pode ter peças associadas, conectando tudo ao veículo que recebeu o serviço.
+O CRUD cobre usuários e veículos completos — GET, POST, PUT e DELETE. Uma regra importante: não é possível deletar um usuário que ainda tem veículos vinculados. A deleção segue a ordem filho → pai.
+A API foi construída em Java + Spring Boot + JPA/Hibernate, com testes unitários via JUnit 5 e Mockito, testes de rota HTTP com MockMvc, cobrindo caminhos felizes e tristes, validações do Spring Security JWT, exceções e muito mais.
 
-A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
+#### A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
 
 ### 1 Obtencao de tokens (login):
 
 METODO POST. http://localhost:8080/auth/login ou acesso na nuvem: https://stealthgarageapi-production.up.railway.app/auth/login
 
-Body:
-
+```Json
 {
 
     "login": "SEU-EMAIL@gmail.com",
@@ -17,22 +20,27 @@ Body:
 	
 }
 
+```
+
 utilize o Token gerado no console, e coloque ele no Auth, selecione Bearer Token e cole o token la dentro, assim, o seu acesso esta autorizado pelo tempo de 2 horas.
 
 Abaixo segue exemplos de requisicoes que poderao ser utilizadas:
 
 Metodo GET:
 
-http://localhost:8080/vehicles
+http://localhost:8080/vehicles (local) / https://stealth-garage-api.onrender.com/vehicles (servidor)
 
-http://localhost:8080/users
+http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/users (servidor)
 
-http://localhost:8080/vehicles/1
+http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.com/vehicles/1 (servidor)
 
-http://localhost:8080/users/1
+http://localhost:8080/users/1 (local) / https://stealth-garage-api.onrender.com/users/1 (servidor)
 
 Metodo POST:
 
+http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/users (servidor)
+
+```Json
 {
 
     "name": "Romario Muniz",
@@ -40,7 +48,11 @@ Metodo POST:
     "phoneNumber": "1199546359"
 	
 }
+```
 
+http://localhost:8080/vehicles (local) / https://stealth-garage-api.onrender.com/vehicles (servidor)
+
+```Json
 {
 
 		"brandAndName": "Chevrolet Cobalt",
@@ -48,10 +60,14 @@ Metodo POST:
 		"licensePlate": "woe4d2043"
 		
 }
+```
 
   Metodo PUT:
 
-  {
+  http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.com/vehicles/1 (servidor)
+
+  ```Json
+{
   
 		"id": 1,
 		"brandAndName": "Chevrolet Cobalt",
@@ -59,27 +75,40 @@ Metodo POST:
 		"licensePlate": "oep3g93"
 		
 }
+```
 
-  {
+http://localhost:8080/users/1 (local) / https://stealth-garage-api.onrender.com/users/1 (servidor)
+
+```Json
+{
   
     "name": "Romario Marques",
     "email": "romariozinhomarques2024@gmail.com",
     "phoneNumber": "11995435359"
 
 }
+```
 
 Metodo DELETE:
 
-http://localhost:8080/users/1 (So sera deletado se nao houver veiculo vinculado a ele)
+http://localhost:8080/users/1 (local) / https://stealth-garage-api.onrender.com/users/1 (servidor) (So sera deletado se nao houver veiculo vinculado a ele)
 
-http://localhost:8080/vehicles/1
+http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.com/vehicles/1 (servidor)
 
-## Como executar ela (Rodando o projeto em seu computador):
+## Como executar a Stealth Garage API (Rodando na nuvem):
+
+URL: https://stealth-garage-api.onrender.com
+
+(A requisicao pode demorar cerca de 50 segundos para ligar, pois esta no plano gratuito do Render que desliga sem uso a cada 15 minutos)
+
+## Como executar a Stealth Garage API (Rodando o projeto em seu computador):
 
 Certifique-se de ter o Java e o Git instalados em seu computador
-Abra o terminal e clone esse repositorio:
+Abra o terminal Git e clone esse repositorio: 
 
-git clone [https://github.com/(Aqui-fica-seu-usuario)/Stealth-Garage-API.git](https://github.com/SEU-USUARIO/Stealth-Garage-API.git)
+```Bash
+git clone https://github.com/SEU-USUARIO/Stealth-Garage-API.git
+```
 
 Abra sua IDE
 
