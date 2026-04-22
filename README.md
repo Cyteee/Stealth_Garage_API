@@ -1,10 +1,15 @@
 ## Stealth Garage API
 
 A Stealth Garage API é uma API REST para gerenciamento de uma garagem: clientes, veículos, peças e registros de manutenção.
+
 Cada cliente tem nome, e-mail e telefone. Cada veículo tem marca, nome, ano e placa — e fica vinculado a um dono. A relação é um para muitos: um cliente pode ter quantos veículos quiser.
+
 Os registros de manutenção guardam data, descrição do serviço e KM do veículo no momento do reparo. Cada registro pode ter peças associadas, conectando tudo ao veículo que recebeu o serviço.
+
 O CRUD cobre usuários e veículos completos — GET, POST, PUT e DELETE. Uma regra importante: não é possível deletar um usuário que ainda tem veículos vinculados. A deleção segue a ordem filho → pai.
+
 A API foi construída em Java + Spring Boot + JPA/Hibernate, com testes unitários via JUnit 5 e Mockito, testes de rota HTTP com MockMvc, cobrindo caminhos felizes e tristes, validações do Spring Security JWT, exceções e muito mais.
+
 
 #### A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
 
