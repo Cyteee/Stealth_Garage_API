@@ -40,7 +40,7 @@ public class VehicleControllerTest {
 
         Mockito.when(vehicleService.findById(idBuscado)).thenReturn(veiculoFalso);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/vehicle/{id}", idBuscado)
+        mockMvc.perform(MockMvcRequestBuilders.get("/vehicles/{id}", idBuscado)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(idBuscado))
