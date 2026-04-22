@@ -32,6 +32,9 @@ public class VehicleController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<VehicleDTO> findById(@PathVariable Long id){
         Vehicle obj = vehicleService.findById(id);
+        if (obj == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok().body(new VehicleDTO(obj));
     }
 

@@ -51,10 +51,9 @@ public class VehicleControllerTest {
     void deveRetornarStatus400QuanVeiculoNaoExistir() throws Exception{
         Long idInexistente = 83L;
 
-        Mockito.when(vehicleService.findById(idInexistente))
-                .thenThrow(new RuntimeException("Veiculo nao encontrado"));
+        Mockito.when(vehicleService.findById(idInexistente)).thenReturn(null);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("Vehicles/{id}", idInexistente)
+        mockMvc.perform(MockMvcRequestBuilders.get("/vehicles/{id}", idInexistente)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
 
