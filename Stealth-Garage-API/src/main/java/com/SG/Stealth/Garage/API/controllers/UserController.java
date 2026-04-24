@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
@@ -52,13 +52,5 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping(value = "/register")
-    public ResponseEntity<Void> register(@RequestBody UserDTO objDto) {
-        User obj = userService.fromDTO(objDto);
-        obj = userService.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
     }
 }
