@@ -43,9 +43,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody UserDTO objDto) {
-        String encryptedPassword = new BCryptPasswordEncoder().encode(objDto.getPassword());
         User obj = userService.fromDTO(objDto);
-        obj.setPassword(encryptedPassword);
         obj = userService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
