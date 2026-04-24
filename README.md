@@ -13,16 +13,28 @@ A API foi construída em Java + Spring Boot + JPA/Hibernate, com testes unitári
 
 #### A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
 
-### 1 Obtencao de tokens (login):
+### 1 Registro do usuario no sistema (register):
+
+METODO POST. http://localhost:8080/auth/register ou acesso na nuvem: https://stealth-garage-api.onrender.com/auth/register
+
+```Json
+{
+  "name": "SEU-NOME",
+  "email": "SEU-EMAIL@gmail.com",
+  "password": "SUA-SENHA",
+  "phoneNumber": "SEU-NUMERO-DE-TELEFONE"
+}
+
+```
+
+### 2 Obtencao de tokens (login):
 
 METODO POST. http://localhost:8080/auth/login ou acesso na nuvem: https://stealth-garage-api.onrender.com/auth/login
 
 ```Json
 {
-
     "login": "SEU-EMAIL@gmail.com",
     "password": "SUA-SENHA"
-	
 }
 
 ```
@@ -47,11 +59,9 @@ http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/us
 
 ```Json
 {
-
     "name": "Romario Muniz",
     "email": "romariozinho204@gmail.com",
     "phoneNumber": "1199546359"
-	
 }
 ```
 
@@ -59,11 +69,9 @@ http://localhost:8080/vehicles (local) / https://stealth-garage-api.onrender.com
 
 ```Json
 {
-
 		"brandAndName": "Chevrolet Cobalt",
 		"year": 2020,
 		"licensePlate": "woe4d2043"
-		
 }
 ```
 
@@ -73,12 +81,10 @@ http://localhost:8080/vehicles (local) / https://stealth-garage-api.onrender.com
 
   ```Json
 {
-  
 		"id": 1,
 		"brandAndName": "Chevrolet Cobalt",
 		"year": 2026,
 		"licensePlate": "oep3g93"
-		
 }
 ```
 
@@ -86,11 +92,9 @@ http://localhost:8080/users/1 (local) / https://stealth-garage-api.onrender.com/
 
 ```Json
 {
-  
     "name": "Romario Marques",
     "email": "romariozinhomarques2024@gmail.com",
     "phoneNumber": "11995435359"
-
 }
 ```
 
