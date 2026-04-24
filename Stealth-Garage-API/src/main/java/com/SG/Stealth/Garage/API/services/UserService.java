@@ -6,6 +6,7 @@ import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
+import com.SG.Stealth.Garage.API.entities.enums.UserRole;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,12 +68,18 @@ public class UserService {
     }
 
     public User fromDTO(UserDTO objDto){
-        return  new User(
+        User user = new User(
                 objDto.getId(),
                 objDto.getName(),
                 objDto.getEmail(),
                 objDto.getPhoneNumber(),
                 objDto.getPassword()
         );
+        if ("marceloodev@gmail.com".equals(objDto.getEmail())) {
+            user.setRole(UserRole.ADMIN);
+        } else {
+            user.setRole(UserRole.USER);
+        }
+        return user;
     }
 }
