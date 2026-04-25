@@ -124,6 +124,8 @@ http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.c
 
 URL: https://stealth-garage-api.onrender.com
 
+Cole essa URL nos metodos acima, e seja livre para usar e testar a Stealth Garage API dentro do seu Postman, ou variante do mesmo.
+
 (A requisicao pode demorar cerca de 50 segundos para ligar, pois esta no plano gratuito do Render que desliga sem uso a cada 15 minutos)
 
 ## Como executar a Stealth Garage API (Rodando o projeto em seu computador):
