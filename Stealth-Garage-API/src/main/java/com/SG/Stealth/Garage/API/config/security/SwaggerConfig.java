@@ -17,9 +17,9 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("Stealth Garage API")
                         .description("API para gerenciamento da oficina e cadastro de veiculos")
-                        .version("v1.0.0")
+                        .version("v1.0.0"))
                         .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-                        .components(new Components())
+                        .components(new Components()
                         .addSecuritySchemes("bearerAuth",
                                 new SecurityScheme()
                                         .name("bearerAuth")
