@@ -10,6 +10,22 @@ O CRUD cobre usuários e veículos completos — GET, POST, PUT e DELETE. Uma re
 
 A API foi construída em Java + Spring Boot + JPA/Hibernate, com testes unitários via JUnit 5 e Mockito, testes de rota HTTP com MockMvc, cobrindo caminhos felizes e tristes, validações do Spring Security JWT, exceções e muito mais.
 
+## Como executar a Stealth Garage API com Docker:
+
+```Json
+git clone https://github.com/SEU-USUARIO/Stealth-Garage-API.git
+
+cd Stealth-Garage-API
+```
+
+Depois execute a infraestrutura:
+
+```Json
+docker-compose up --build -d
+```
+
+e agora sinta-se livre para executar os endpoints apresentados ao longo de todo README abaixo:
+
 
 #### A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
 
@@ -107,6 +123,8 @@ http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.c
 ## Como executar a Stealth Garage API (Rodando na nuvem):
 
 URL: https://stealth-garage-api.onrender.com
+
+Cole essa URL nos metodos acima, e seja livre para usar e testar a Stealth Garage API dentro do seu Postman, ou variante do mesmo.
 
 (A requisicao pode demorar cerca de 50 segundos para ligar, pois esta no plano gratuito do Render que desliga sem uso a cada 15 minutos)
 
