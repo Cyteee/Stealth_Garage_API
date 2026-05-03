@@ -37,7 +37,7 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @Operation(summary = "Login and take a token", description = "Log and take a token to authorize yourself in the sistem")
+    @Operation(summary = "Login and take a token", description = "Log and take a token to authorize yourself in the system")
     @ApiResponse(responseCode = "200", description = "Successfully logged in")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
