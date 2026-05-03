@@ -15,7 +15,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Tag(name = "User Management", description = "Endpoints for managing users")@RestController
+@Tag(name = "User Management", description = "Endpoints for managing users")
+@RestController
 @RequestMapping(value = "/users")
 public class UserController {
 

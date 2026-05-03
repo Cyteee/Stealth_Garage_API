@@ -5,6 +5,7 @@ import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.services.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "Vehicle Management", description = "Endpoints for managing vehicles")
 @RestController
 @RequestMapping(value = "/vehicles")
 public class VehicleController {
