@@ -67,6 +67,7 @@ public class VehicleController {
     @Operation(summary = "Update a vehicle", description = "Update a vehicle in the database")
     @ApiResponse(responseCode = "204", description = "Updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody VehicleDTO objDto){
@@ -79,6 +80,7 @@ public class VehicleController {
     @Operation(summary = "Delete a vehicle", description = "Delete a vehicle in the database")
     @ApiResponse(responseCode = "204", description = "Deleted successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
