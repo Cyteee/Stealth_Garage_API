@@ -22,6 +22,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Operation(summary = "Find all users", description = "Find all users in the database")
+    @ApiResponse(responseCode = "200", description = "Found successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "404", description = "Resource not found")
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(){
         List<User> list = userService.findAll();
@@ -29,6 +33,10 @@ public class UserController {
         return ResponseEntity.ok().body(listDto);
     }
 
+    @Operation(summary = "Find a user by ID", description = "Find a user by ID in the database")
+    @ApiResponse(responseCode = "200", description = "Found successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "404", description = "Resource not found")
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id){
         User obj = userService.findById(id);
