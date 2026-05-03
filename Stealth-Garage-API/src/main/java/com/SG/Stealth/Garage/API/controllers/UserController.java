@@ -37,6 +37,7 @@ public class UserController {
     @Operation(summary = "Create a new user", description = "Create a user in the database")
     @ApiResponse(responseCode = "201", description = "User created successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "404", description = "Resource not found")
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody UserDTO objDto){
         User obj = userService.fromDTO(objDto);
@@ -56,6 +57,7 @@ public class UserController {
     @Operation(summary = "Delete a user/vehicle", description = "Delete a user/vehicle in the database")
     @ApiResponse(responseCode = "204", description = "Deleted successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "404", description = "Resource not found")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
