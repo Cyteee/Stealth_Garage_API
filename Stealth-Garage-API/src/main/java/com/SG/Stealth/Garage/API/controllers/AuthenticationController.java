@@ -40,6 +40,7 @@ public class AuthenticationController {
     @Operation(summary = "Login and take a token", description = "Log and take a token to authorize yourself in the sistem")
     @ApiResponse(responseCode = "200", description = "Successfully logged in")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
