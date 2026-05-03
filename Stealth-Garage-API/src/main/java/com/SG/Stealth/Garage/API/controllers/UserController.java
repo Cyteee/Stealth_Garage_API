@@ -3,6 +3,8 @@ package com.SG.Stealth.Garage.API.controllers;
 import com.SG.Stealth.Garage.API.DTO.UserDTO;
 import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,9 @@ public class UserController {
         return ResponseEntity.ok().body(new UserDTO(obj));
     }
 
+    @Operation(summary = "Create a new user", description = "Creates a new user in the database.")
+    @ApiResponse(responseCode = "201", description = "User created successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid input data")
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody UserDTO objDto){
         User obj = userService.fromDTO(objDto);
