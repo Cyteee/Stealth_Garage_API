@@ -47,6 +47,10 @@ public class UserController {
         return ResponseEntity.created(uri).build();
     }
 
+    @Operation(summary = "Update a user", description = "Update a user in the database")
+    @ApiResponse(responseCode = "204", description = "Updated successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid input data")
+    @ApiResponse(responseCode = "404", description = "Resource not found")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UserDTO objDto){
         User obj = userService.fromDTO(objDto);
