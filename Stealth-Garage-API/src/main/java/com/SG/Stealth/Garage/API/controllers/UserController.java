@@ -55,7 +55,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Delete a user/vehicle", description = "Delete a user/vehicle in the database")
+    @Operation(summary = "Delete a user", description = "Delete a user in the database")
     @ApiResponse(responseCode = "204", description = "Deleted successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @ApiResponse(responseCode = "404", description = "Resource not found")
