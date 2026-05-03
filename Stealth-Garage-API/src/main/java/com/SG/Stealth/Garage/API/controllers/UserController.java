@@ -34,7 +34,7 @@ public class UserController {
         return ResponseEntity.ok().body(new UserDTO(obj));
     }
 
-    @Operation(summary = "Create a new user", description = "Creates a new user in the database.")
+    @Operation(summary = "Create a new user", description = "Create a user in the database")
     @ApiResponse(responseCode = "201", description = "User created successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @PostMapping
@@ -53,6 +53,9 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Delete a user/vehicle", description = "Delete a user/vehicle in the database")
+    @ApiResponse(responseCode = "204", description = "Deleted successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid input data")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
