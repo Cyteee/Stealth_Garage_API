@@ -25,7 +25,6 @@ public class UserController {
     @Operation(summary = "Find all users", description = "Find all users in the database")
     @ApiResponse(responseCode = "200", description = "Found successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
-    @ApiResponse(responseCode = "404", description = "Resource not found")
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(){
         List<User> list = userService.findAll();
