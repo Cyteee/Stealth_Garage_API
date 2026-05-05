@@ -69,7 +69,6 @@ public class VehicleService {
                 objDto.getBrandAndName(),
                 objDto.getYear(),
                 objDto.getLicensePlate(),
-                owner
         );
     }
 }
