@@ -63,14 +63,14 @@ public class VehicleService {
         }
     }
 
-    public Vehicle fromDTO(VehicleDTO objDto, UserDTO userDTO) {
+    public Vehicle fromDTO(VehicleDTO objDto, User owner) {
 
         return new Vehicle(
                 objDto.getId(),
                 objDto.getBrandAndName(),
                 objDto.getYear(),
                 objDto.getLicensePlate(),
-                userDTO.getName()
+                owner
         );
     }
 }
