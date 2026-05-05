@@ -1,5 +1,6 @@
 package com.SG.Stealth.Garage.API.services;
 
+import com.SG.Stealth.Garage.API.DTO.UserDTO;
 import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
 import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
@@ -62,13 +63,14 @@ public class VehicleService {
         }
     }
 
-    public Vehicle fromDTO(VehicleDTO objDto) {
+    public Vehicle fromDTO(VehicleDTO objDto, UserDTO userDTO) {
 
         return new Vehicle(
                 objDto.getId(),
                 objDto.getBrandAndName(),
                 objDto.getYear(),
                 objDto.getLicensePlate(),
+                userDTO.getName()
         );
     }
 }
