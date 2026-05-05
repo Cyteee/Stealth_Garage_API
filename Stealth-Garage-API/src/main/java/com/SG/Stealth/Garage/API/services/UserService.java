@@ -84,11 +84,6 @@ public class UserService {
                 objDto.getPhoneNumber(),
                 objDto.getPassword()
         );
-        if ("marceloodev@gmail.com".equals(objDto.getEmail())) {
-            user.setRole(UserRole.ADMIN);
-        } else {
-            user.setRole(UserRole.USER);
-        }
         return user;
     }
 }
