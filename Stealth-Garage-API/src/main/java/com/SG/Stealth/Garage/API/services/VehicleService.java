@@ -22,8 +22,6 @@ public class VehicleService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    @Autowired
-    private UserRepository userRepository;
 
     public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
@@ -65,8 +63,6 @@ public class VehicleService {
     }
 
     public Vehicle fromDTO(VehicleDTO objDto) {
-
-        User owner = userRepository.findById(objDto.getOwner().getId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 
         return new Vehicle(
                 objDto.getId(),
