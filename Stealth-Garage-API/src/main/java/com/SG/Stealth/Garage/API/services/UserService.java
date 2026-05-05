@@ -10,6 +10,7 @@ import com.SG.Stealth.Garage.API.entities.enums.UserRole;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +28,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Value("${api.security.admins}")
+    private List<String> adminEmails;
+
     public List<User> findAll() {
         return repository.findAll();
     }
@@ -38,6 +42,11 @@ public class UserService {
 
     public User insert(User obj) {
         obj.setPassword(passwordEncoder.encode(obj.getPassword()));
+        if (adminEmails.contains(obj.getEmail())) {
+            obj.setRole(UserRole.ADMIN);
+        }else{
+            obj.setRole(UserRole.USER);
+        }
         return repository.save(obj);
     }
 

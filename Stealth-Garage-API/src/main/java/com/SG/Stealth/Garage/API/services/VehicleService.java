@@ -23,7 +23,6 @@ public class VehicleService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-
     public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
     }
