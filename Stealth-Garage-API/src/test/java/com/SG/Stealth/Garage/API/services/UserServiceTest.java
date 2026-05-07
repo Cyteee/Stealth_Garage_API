@@ -28,6 +28,6 @@ public class UserServiceTest {
     @Test
     void deve(){
 
-
+        new UserService();
     }
 }
