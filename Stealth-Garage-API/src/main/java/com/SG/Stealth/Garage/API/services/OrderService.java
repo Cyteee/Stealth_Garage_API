@@ -14,7 +14,6 @@ public class OrderService {
 
     public double calculateTotalOrderCost(){
         double total = 0.0;
-
         for (MaintenanceTaskStrategy task: tasks){
             total = total + task.calculateCost();
         }

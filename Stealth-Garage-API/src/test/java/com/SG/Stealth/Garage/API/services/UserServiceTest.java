@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.Mockito;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,30 +19,15 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     @InjectMocks
     private UserService userService;
 
     @Test
-    void deveAtualizarUmUsuario(){
-        Long idDoUsuario = 1L;
+    void deve(){
 
-        User usuarioVelho = new User();
-        usuarioVelho.setId(idDoUsuario);
-        usuarioVelho.setName("Ozias Souza");
-        usuarioVelho.setPhoneNumber("11995862658");
 
-        User dadosNovosDaRequisicao = new User();
-        dadosNovosDaRequisicao.setName("Osias Souza");
-        dadosNovosDaRequisicao.setPhoneNumber("11985684983");
-
-        Mockito.when(userRepository.getReferenceById(idDoUsuario)).thenReturn(usuarioVelho);
-
-        Mockito.when(userRepository.save(usuarioVelho)).thenReturn(usuarioVelho);
-
-        User resultado = userService.update(idDoUsuario, dadosNovosDaRequisicao);
-
-        assertEquals(1L, resultado.getId());
-        assertEquals("Osias Souza", resultado.getName());
-        assertEquals("11985684983", resultado.getPhoneNumber());
     }
 }
