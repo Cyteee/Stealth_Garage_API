@@ -22,14 +22,19 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository repository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Value("${api.security.admins}")
     private List<String> adminEmails;
+
+    public UserService(UserRepository repository,
+                       PasswordEncoder passwordEncoder,
+                       @Value("${admin.emails}") List<String> adminEmails) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.adminEmails = adminEmails;
+    }
 
     public List<User> findAll() {
         return repository.findAll();
