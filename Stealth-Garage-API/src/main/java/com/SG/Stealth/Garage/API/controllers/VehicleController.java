@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.SG.Stealth.Garage.API.entities.User;
-import com.SG.Stealth.Garage.API.DTO.UserDTO;
 
 import java.net.URI;
 import java.util.List;
@@ -50,15 +49,14 @@ public class VehicleController {
     }
 
     @Operation(summary = "Create a new vehicle", description = "Create a vehicle in the database")
-    @ApiResponse(responseCode = "201", description = "vehicle created successfully")
+    @ApiResponse(responseCode = "201", description = "Vehicle created successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody VehicleDTO objDto){
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         User loggedUser = (User) authentication.getPrincipal();
-        objDto.setOwner(new UserDTO(loggedUser));
-        Vehicle obj = vehicleService.fromDTO(objDto);
+        Vehicle obj = vehicleService.fromDTO(objDto, loggedUser);
         obj = vehicleService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -71,7 +69,7 @@ public class VehicleController {
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody VehicleDTO objDto){
-        Vehicle obj = vehicleService.fromDTO(objDto);
+        Vehicle obj = vehicleService.fromDTO(objDto, null);
         obj.setId(id);
         obj = vehicleService.update(id, obj);
         return ResponseEntity.noContent().build();
