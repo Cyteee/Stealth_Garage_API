@@ -17,6 +17,10 @@ public class MaintenceRecord {
     private String description;
     private double km;
 
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+
     @ManyToMany
     @JoinTable(name = "tb_maintence_record_part)", joinColumns = @JoinColumn(name = "maintence_record_id"), inverseJoinColumns = @JoinColumn(name = "part_id"))
     private Set<Part> parts = new HashSet<>();
@@ -61,6 +65,18 @@ public class MaintenceRecord {
 
     public void setKm(double km) {
         this.km = km;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public void setParts(Set<Part> parts) {
+        this.parts = parts;
     }
 
     public double getTotal(){
