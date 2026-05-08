@@ -26,49 +26,6 @@ docker-compose up --build -d
 
 e agora sinta-se livre para executar os endpoints apresentados ao longo de todo README abaixo:
 
-
-#### A Stealth Garage API utiliza o Spring Security, com arquitetura Stateless e Tokens JWT, isso significa que para acessar e fazer configuracoes na API, e necessario autenticacao e autorizacao, obtenha o Token com os passos abaixo:
-
-### 1 Registro do usuario no sistema (register):
-
-METODO POST. http://localhost:8080/auth/register ou acesso na nuvem: https://stealth-garage-api.onrender.com/auth/register
-
-```Json
-{
-  "name": "SEU-NOME",
-  "email": "SEU-EMAIL@gmail.com",
-  "password": "SUA-SENHA",
-  "phoneNumber": "SEU-NUMERO-DE-TELEFONE"
-}
-
-```
-
-### 2 Obtencao de tokens (login):
-
-METODO POST. http://localhost:8080/auth/login ou acesso na nuvem: https://stealth-garage-api.onrender.com/auth/login
-
-```Json
-{
-    "login": "SEU-EMAIL@gmail.com",
-    "password": "SUA-SENHA"
-}
-
-```
-
-utilize o Token gerado no console, e coloque ele no Auth, selecione Bearer Token e cole o token la dentro, assim, o seu acesso esta autorizado pelo tempo de 2 horas.
-
-Abaixo segue exemplos de requisicoes que poderao ser utilizadas:
-
-Metodo GET:
-
-http://localhost:8080/vehicles (local) / https://stealth-garage-api.onrender.com/vehicles (servidor)
-
-http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/users (servidor)
-
-http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.com/vehicles/1 (servidor)
-
-http://localhost:8080/users/1 (local) / https://stealth-garage-api.onrender.com/users/1 (servidor)
-
 Metodo POST:
 
 http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/users (servidor)
@@ -119,6 +76,13 @@ Metodo DELETE:
 http://localhost:8080/users/1 (local) / https://stealth-garage-api.onrender.com/users/1 (servidor) (So sera deletado se nao houver veiculo vinculado a ele)
 
 http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.com/vehicles/1 (servidor)
+
+## Como executar a Stealth Garage API no Swagger (Documentacao interativa):
+
+1 - Rode a aplicacao via Docker ou localmente
+2 - Acesse no seu navegador: http://localhost:8080/swagger-ui/index.html#/
+3 - Autenticacao JWT: Expanda a rota POST/auth/login e insira suas credenciais. Apos isso copie o token gerado e cole dentro do botao Authorize no topo da pagina
+4 - Pronto!, rodando e permissao concebida a APIRESTful como USER!
 
 ## Como executar a Stealth Garage API (Rodando na nuvem):
 
