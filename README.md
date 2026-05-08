@@ -79,6 +79,8 @@ http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.c
 
 ## Como executar a Stealth Garage API no Swagger (Documentacao interativa):
 
+(Swagger%20Stealth%20Garage%20API.png)
+
 
 1 - Rode a aplicacao via Docker ou localmente
 
