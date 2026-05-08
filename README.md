@@ -82,6 +82,7 @@ http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.c
 <img width="1918" height="1080" alt="Swagger Stealth Garage API" src="https://github.com/user-attachments/assets/e8649ea0-172d-477d-b675-5e0994815626" />
 
 
+
 1 - Rode a aplicacao via Docker ou localmente
 
 2 - Acesse no seu navegador: http://localhost:8080/swagger-ui/index.html#/
