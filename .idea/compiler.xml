@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Stealth-Garage-API" />
+        <module name="01" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="01" options="-parameters" />
       <module name="Stealth-Garage-API" options="-parameters" />
     </option>
   </component>
