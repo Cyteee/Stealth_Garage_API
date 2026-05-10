@@ -31,8 +31,6 @@ public class UserServiceTest {
         userService = new UserService(userRepository, passwordEncoder, List.of("admin@teste.com"));
     }
 
-    UserService userService = new UserService(userRepository, passwordEncoder, List.of("admin@teste.com"));
-
     @Test
     void deveAtribuirRoleAdminQuandoEmailEstiverNaLista() {
         User user = new User();
