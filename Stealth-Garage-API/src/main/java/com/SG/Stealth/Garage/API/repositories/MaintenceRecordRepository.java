@@ -10,4 +10,7 @@ import java.util.List;
 public interface MaintenceRecordRepository extends JpaRepository<MaintenceRecord, Long> {
     @Query("SELECT m FROM MaintenanceRecord m WHERE m.cost >= :valorTeto")
     List<MaintenceRecord> buscarManutencoesAcimaDoTeto(@Param("valorTeto") Double valorTeto);
+
+    @Query("SELECT m.part, COUNT(m) FROM MaintenanceRecord m GROUP BY m.part")
+    List<Object[]> contarPecasMaisUtilizadas();
 }
