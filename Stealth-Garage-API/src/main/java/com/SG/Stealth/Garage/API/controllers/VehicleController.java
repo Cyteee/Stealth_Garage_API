@@ -29,8 +29,13 @@ public class VehicleController {
     @ApiResponse(responseCode = "200", description = "Found successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @GetMapping
-    public ResponseEntity<List<VehicleDTO>> findAll(){
-        List<Vehicle> list = vehicleService.findAll();
+    public ResponseEntity<List<VehicleDTO>> findAll(@RequestParam(name = "ano", required = false) Integer ano){
+        List<Vehicle> list;
+        if (ano != null) {
+            list = vehicleService.searchByYear(ano);
+        } else {
+            list = vehicleService.findAll();
+        }
         List<VehicleDTO> listDto = list.stream().map(x -> new VehicleDTO(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }

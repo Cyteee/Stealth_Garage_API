@@ -72,4 +72,8 @@ public class VehicleService {
                 owner
         );
     }
+
+    public List<Vehicle> searchByYear(Integer ano) {
+        return vehicleRepository.findByYearCustom(ano);
+    }
 }
