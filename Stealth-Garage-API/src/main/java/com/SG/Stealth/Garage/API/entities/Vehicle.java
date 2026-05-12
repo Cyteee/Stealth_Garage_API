@@ -41,7 +41,9 @@ public class Vehicle {
     }
 
     @Query(value = "SELECT * FROM tb_vehicle WHERE vehicle_year >= :year", nativeQuery = true)
-    List<Vehicle> findVehiclesNewerThanNative(@Param("year") Integer year);
+    List<Vehicle> findVehiclesNewerThanNative(@Param("year") Integer year) {
+        return null;
+    }
 
     public Long getId() {
         return id;
