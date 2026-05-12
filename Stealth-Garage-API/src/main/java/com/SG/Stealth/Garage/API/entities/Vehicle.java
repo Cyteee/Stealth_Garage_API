@@ -1,6 +1,7 @@
 package com.SG.Stealth.Garage.API.entities;
 
 import jakarta.persistence.*;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -35,7 +36,9 @@ public class Vehicle {
     }
 
     @Query("SELECT v FROM Vehicle v WHERE v.brandAndName LIKE %:keyword%")
-    List<Vehicle> searchByBrandOrNameJPQL(@Param("keyword") String keyword);
+    List<Vehicle> searchByBrandOrNameJPQL(@Param("keyword") String keyword) {
+        return null;
+    }
 
     public Long getId() {
         return id;
