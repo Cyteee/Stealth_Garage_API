@@ -1,7 +1,9 @@
 package com.SG.Stealth.Garage.API.entities;
 
 import jakarta.persistence.*;
+import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -31,6 +33,9 @@ public class Vehicle {
         this.licensePlate = placa;
         this.owner = owner;
     }
+
+    @Query("SELECT v FROM Vehicle v WHERE v.brandAndName LIKE %:keyword%")
+    List<Vehicle> searchByBrandOrNameJPQL(@Param("keyword") String keyword);
 
     public Long getId() {
         return id;
