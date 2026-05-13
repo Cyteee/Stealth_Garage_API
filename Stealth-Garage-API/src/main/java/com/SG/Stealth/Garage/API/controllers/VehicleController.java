@@ -1,6 +1,7 @@
 package com.SG.Stealth.Garage.API.controllers;
 
 import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
+import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.services.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +16,7 @@ import com.SG.Stealth.Garage.API.entities.User;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Tag(name = "Vehicle Management", description = "Endpoints for managing vehicles")
@@ -47,9 +49,6 @@ public class VehicleController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<VehicleDTO> findById(@PathVariable Long id){
         Vehicle obj = vehicleService.findById(id);
-        if (obj == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok().body(new VehicleDTO(obj));
     }
 
