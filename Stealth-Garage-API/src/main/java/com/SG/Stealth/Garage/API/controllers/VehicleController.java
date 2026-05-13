@@ -7,6 +7,7 @@ import com.SG.Stealth.Garage.API.services.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.SG.Stealth.Garage.API.entities.User;
 
+import org.springframework.data.domain.Pageable;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -31,15 +33,15 @@ public class VehicleController {
     @ApiResponse(responseCode = "200", description = "Found successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @GetMapping
-    public ResponseEntity<List<VehicleDTO>> findAll(@RequestParam(name = "ano", required = false) Integer ano){
-        List<Vehicle> list;
+    public ResponseEntity<Page<VehicleDTO>> findAll(@RequestParam(name = "ano", required = false) Integer ano, Pageable pageable) {
+        Page<Vehicle> page;
         if (ano != null) {
-            list = vehicleService.searchByYear(ano);
+            page = vehicleService.searchByYear(ano, pageable);
         } else {
-            list = vehicleService.findAll();
+            page = vehicleService.findAllPaged(pageable);
         }
-        List<VehicleDTO> listDto = list.stream().map(x -> new VehicleDTO(x)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
+        Page<VehicleDTO> pageDto = page.map(VehicleDTO::new);
+        return ResponseEntity.ok().body(pageDto);
     }
 
     @Operation(summary = "Find a vehicle by ID", description = "Find a vehicle by ID in the database")

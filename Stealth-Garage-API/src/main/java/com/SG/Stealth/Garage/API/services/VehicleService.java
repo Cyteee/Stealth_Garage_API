@@ -1,17 +1,17 @@
 package com.SG.Stealth.Garage.API.services;
 
-import com.SG.Stealth.Garage.API.DTO.UserDTO;
 import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
 import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
-import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import com.SG.Stealth.Garage.API.repositories.VehicleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,7 +73,11 @@ public class VehicleService {
         );
     }
 
-    public List<Vehicle> searchByYear(Integer ano) {
-        return vehicleRepository.findByYearCustom(ano);
+    public Page<Vehicle> findAllPaged(Pageable pageable) {
+        return vehicleRepository.findAll(pageable);
+    }
+
+    public Page<Vehicle> searchByYear(Integer ano, Pageable pageable) {
+        return vehicleRepository.searchByYear(ano, pageable);
     }
 }
