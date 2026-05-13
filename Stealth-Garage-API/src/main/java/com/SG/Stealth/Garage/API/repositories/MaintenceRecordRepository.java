@@ -11,6 +11,6 @@ public interface MaintenceRecordRepository extends JpaRepository<MaintenceRecord
     @Query("SELECT m FROM MaintenceRecord m WHERE m.cost >= :valorTeto")
     List<MaintenceRecord> buscarManutencoesAcimaDoTeto(@Param("valorTeto") Double valorTeto);
 
-    @Query("SELECT m.part, COUNT(m) FROM MaintenanceRecord m GROUP BY m.part")
+    @Query("SELECT m.part, COUNT(m) FROM MaintenceRecord m GROUP BY m.part")
     List<Object[]> contarPecasMaisUtilizadas();
 }
