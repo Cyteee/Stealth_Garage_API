@@ -35,16 +35,6 @@ public class Vehicle {
         this.owner = owner;
     }
 
-    @Query("SELECT v FROM Vehicle v WHERE v.brandAndName LIKE %:keyword%")
-    List<Vehicle> searchByBrandOrNameJPQL(@Param("keyword") String keyword) {
-        return null;
-    }
-
-    @Query(value = "SELECT * FROM tb_vehicle WHERE vehicle_year >= :year", nativeQuery = true)
-    List<Vehicle> findVehiclesNewerThanNative(@Param("year") Integer year) {
-        return null;
-    }
-
     public Long getId() {
         return id;
     }

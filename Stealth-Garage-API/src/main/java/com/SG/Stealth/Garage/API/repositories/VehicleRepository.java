@@ -10,4 +10,10 @@ import java.util.List;
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query("SELECT v FROM Vehicle v WHERE v.year = :ano")
     List<Vehicle> findByYearCustom(@Param("ano") Integer ano);
+
+    @Query("SELECT v FROM Vehicle v WHERE v.brandAndName LIKE %:keyword%")
+    List<Vehicle> searchByBrandOrNameJPQL(@Param("keyword") String keyword);
+
+    @Query(value = "SELECT * FROM tb_vehicle WHERE vehicle_year >= :year", nativeQuery = true)
+    List<Vehicle> findVehiclesNewerThanNative(@Param("year") Integer year);
 }
