@@ -22,7 +22,7 @@ public class MaintenceRecord {
     private Vehicle vehicle;
 
     @ManyToMany
-    @JoinTable(name = "tb_maintence_record_part)", joinColumns = @JoinColumn(name = "maintence_record_id"), inverseJoinColumns = @JoinColumn(name = "part_id"))
+    @JoinTable(name = "tb_maintence_record_part", joinColumns = @JoinColumn(name = "maintence_record_id"), inverseJoinColumns = @JoinColumn(name = "part_id"))
     private Set<Part> parts = new HashSet<>();
 
     public MaintenceRecord() {
