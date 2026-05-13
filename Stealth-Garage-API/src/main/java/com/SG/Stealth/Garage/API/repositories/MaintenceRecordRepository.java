@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MaintenceRecordRepository extends JpaRepository<MaintenceRecord, Long> {
-    @Query("SELECT m FROM MaintenceRecord m WHERE m.cost >= :valorTeto")
-    List<MaintenceRecord> buscarManutencoesAcimaDoTeto(@Param("valorTeto") Double valorTeto);
+    @Query("SELECT m FROM MaintenceRecord m WHERE m.km >= :quilometragem")
+    List<MaintenceRecord> buscarManutencoesPorKmAcimaDe(@Param("quilometragem") Double quilometragem);
 
-    @Query("SELECT p.name, COUNT(m) FROM MaintenceRecord m JOIN m.parts p GROUP BY p.name")
+    @Query("SELECT p.name, COUNT(m) FROM MaintenceRecord m JOIN m.parts p GROUP BY p.usedPartsName")
     List<Object[]> contarPecasMaisUtilizadas();
 }
