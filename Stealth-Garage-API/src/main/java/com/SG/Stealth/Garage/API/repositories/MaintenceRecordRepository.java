@@ -11,6 +11,6 @@ public interface MaintenceRecordRepository extends JpaRepository<MaintenceRecord
     @Query("SELECT m FROM MaintenceRecord m WHERE m.km >= :quilometragem")
     List<MaintenceRecord> buscarManutencoesPorKmAcimaDe(@Param("quilometragem") Double quilometragem);
 
-    @Query("SELECT p.name, COUNT(m) FROM MaintenceRecord m JOIN m.parts p GROUP BY p.usedPartsName")
+    @Query("SELECT p.usedPartsName, COUNT(m) FROM MaintenceRecord m JOIN m.parts p GROUP BY p.usedPartsName")
     List<Object[]> contarPecasMaisUtilizadas();
 }
