@@ -26,6 +26,10 @@ docker-compose up --build -d
 
 e agora sinta-se livre para executar os endpoints apresentados ao longo de todo README abaixo:
 
+Metodo GET:
+
+
+
 Metodo POST:
 
 http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/users (servidor)
