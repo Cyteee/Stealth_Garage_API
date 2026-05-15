@@ -32,10 +32,10 @@ Buscar Todos os Veículos (Utilizamos paginacao):
 Retorna uma lista paginada de todos os veículos. 
 
 Parametros da Query: 
-- `page` (opcional): O numero da pagina a ser recuperada.
-- `size` (opcional): A quantidade de registros por pagina (Padrao e 20).
-- `sort` (opcional): O criterio de ordenação no formato `propriedade,direção`.
-- `ano` (opcional): Filtra os veiculos pelo ano de fabricação especificado.
+- `page`: Numero da pagina a ser recuperada
+- `size`: Quantidade de registros por pagina (Padrao e 20)
+- `sort`: Ccriterio de ordenação no formato `propriedade,direção`
+- `ano`: Filtra os veiculos pelo ano de fabricação especificado
 
 Exemplo de requisicao:
 
