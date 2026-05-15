@@ -26,6 +26,21 @@ docker-compose up --build -d
 
 e agora sinta-se livre para executar os endpoints apresentados ao longo de todo README abaixo:
 
+Buscar Todos os Veículos (Utilizamos paginacao):
+`GET /vehicles`
+
+Retorna uma lista paginada de todos os veículos. 
+
+Parametros da Query: 
+- `page` (opcional): O numero da pagina a ser recuperada.
+- `size` (opcional): A quantidade de registros por pagina (Padrao e 20).
+- `sort` (opcional): O criterio de ordenação no formato `propriedade,direção`.
+- `ano` (opcional): Filtra os veiculos pelo ano de fabricação especificado.
+
+Exemplo de requisicao:
+
+`GET /vehicles?page=0&size=10&sort=brandAndName,asc&ano=2018`
+
 Metodo POST:
 
 http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/users (servidor)
@@ -90,21 +105,6 @@ http://localhost:8080/vehicles/1 (local) / https://stealth-garage-api.onrender.c
 3 - Autenticacao JWT: Expanda a rota POST/auth/login e insira suas credenciais. Apos isso copie o token gerado e cole dentro do botao Authorize no topo da pagina
 
 4 - Pronto!, rodando e permissao concebida a APIRESTful como USER!
-
-Buscar Todos os Veículos (Utilizamos paginacao):
-`GET /vehicles`
-
-Retorna uma lista paginada de todos os veículos. 
-
-Parametros da Query: 
-- `page` (opcional): O numero da pagina a ser recuperada.
-- `size` (opcional): A quantidade de registros por pagina (Padrao e 20).
-- `sort` (opcional): O criterio de ordenação no formato `propriedade,direção`.
-- `ano` (opcional): Filtra os veiculos pelo ano de fabricação especificado.
-
-Exemplo de requisicao:
-
-`GET /vehicles?page=0&size=10&sort=brandAndName,asc&ano=2018`
 
 ## Como executar a Stealth Garage API (Rodando na nuvem):
 
