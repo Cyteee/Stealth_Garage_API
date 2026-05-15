@@ -26,7 +26,7 @@ docker-compose up --build -d
 
 e agora sinta-se livre para executar os endpoints apresentados ao longo de todo README abaixo:
 
-Buscar Todos os Veículos (Utilizamos paginacao):
+Buscar todos os veiculos (Paginado):
 `GET /vehicles`
 
 Retorna uma lista paginada de todos os veículos. 
