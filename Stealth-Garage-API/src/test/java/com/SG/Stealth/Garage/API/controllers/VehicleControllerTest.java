@@ -1,6 +1,7 @@
 package com.SG.Stealth.Garage.API.controllers;
 
 import com.SG.Stealth.Garage.API.config.security.TokenService;
+import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import com.SG.Stealth.Garage.API.services.UserService;
@@ -48,14 +49,14 @@ public class VehicleControllerTest {
     }
 
     @Test
-    void deveRetornarStatus400QuanVeiculoNaoExistir() throws Exception{
+    void deveRetornarStatus404QuandoVeiculoNaoExistir() throws Exception {
         Long idInexistente = 83L;
 
-        Mockito.when(vehicleService.findById(idInexistente)).thenReturn(null);
+        Mockito.when(vehicleService.findById(idInexistente))
+                .thenThrow(new ResourceNotFoundException(idInexistente));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/vehicles/{id}", idInexistente)
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
-
     }
 }
