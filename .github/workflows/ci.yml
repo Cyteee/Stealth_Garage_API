@@ -17,4 +17,5 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Rodar testes com Maven
+        working-directory: ./Stealth-Garage-API
         run: mvn clean test
