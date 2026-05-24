@@ -1,31 +1,23 @@
 version: '3.8'
 
 services:
-
   db:
-    image: postgres:15
-    container_name: stealth_garage_db
+    image: postgres:latest
+    container_name: stealth_postgres
     environment:
-      POSTGRES_DB: stealth_garage
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stealth_garage
     ports:
       - "5432:5432"
-    networks:
-      - stealth-network
 
   api:
     build: .
-    container_name: stealth_garage_api
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
+    container_name: stealth_api
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - JWT_SECRET=superowul-erwiii0-2-123
     depends_on:
       - db
-    networks:
-      - stealth-network
-
-networks:
-  stealth-network:
-    driver: bridge
