@@ -26,6 +26,21 @@ docker-compose up --build -d
 
 e agora sinta-se livre para executar os endpoints apresentados ao longo de todo README abaixo:
 
+Buscar todos os veiculos (Paginado):
+`GET /vehicles`
+
+Retorna uma lista paginada de todos os veículos. 
+
+Parametros da Query: 
+- `page`: Numero da pagina a ser recuperada
+- `size`: Quantidade de registros por pagina (Padrao e 20)
+- `sort`: Ccriterio de ordenação no formato `propriedade,direção`
+- `ano`: Filtra os veiculos pelo ano de fabricação especificado
+
+Exemplo de requisicao:
+
+`GET /vehicles?page=0&size=10&sort=brandAndName,asc&ano=2018`
+
 Metodo POST:
 
 http://localhost:8080/users (local) / https://stealth-garage-api.onrender.com/users (servidor)
