@@ -4,9 +4,11 @@ import com.SG.Stealth.Garage.API.repositories.MaintenceRecordRepository;
 import com.SG.Stealth.Garage.API.strategies.MaintenanceTaskStrategy;
 import com.SG.Stealth.Garage.API.strategies.OilChangeTaskStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrderService {
 
     @Autowired
