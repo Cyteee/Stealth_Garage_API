@@ -1,5 +1,8 @@
 package com.SG.Stealth.Garage.API.strategies;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class OilChangeTaskStrategy implements MaintenanceTaskStrategy {
 
     @Override
