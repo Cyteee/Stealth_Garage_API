@@ -20,11 +20,14 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Tag(name = "Vehicle Management", description = "Endpoints for managing vehicles")
 @RestController
 @RequestMapping(value = "/vehicles")
 public class VehicleController {
+    private static final Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
     @Autowired
     private VehicleService vehicleService;
@@ -89,6 +92,7 @@ public class VehicleController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         vehicleService.delete(id);
+        logger.info("Vehicle " + id + "was deleted by the system.");
         return ResponseEntity.noContent().build();
     }
 }

@@ -10,6 +10,8 @@ O CRUD cobre usuários e veículos completos — GET, POST, PUT e DELETE. Uma re
 
 A API foi construída em Java + Spring Boot + JPA/Hibernate, com testes unitários via JUnit 5 e Mockito, testes de rota HTTP com MockMvc, cobrindo caminhos felizes e tristes, validações do Spring Security JWT, exceções e muito mais.
 
+![Build Status](https://github.com/Cyteee/Stealth_Garage_API/actions/workflows/ci.yml/badge.svg)
+
 ## Como executar a Stealth Garage API com Docker:
 
 ```Json
