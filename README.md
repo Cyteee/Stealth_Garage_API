@@ -4,6 +4,7 @@
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Build Status](https://github.com/Cyteee/Stealth_Garage_API/actions/workflows/ci.yml/badge.svg)
 
 A Stealth Garage API é uma API REST para gerenciamento de uma garagem: clientes, veículos, peças e registros de manutenção.
 
@@ -14,8 +15,6 @@ Os registros de manutenção guardam data, descrição do serviço e KM do veíc
 O CRUD cobre usuários e veículos completos — GET, POST, PUT e DELETE. Uma regra importante: não é possível deletar um usuário que ainda tem veículos vinculados. A deleção segue a ordem filho → pai.
 
 A API foi construída em Java + Spring Boot + JPA/Hibernate, com testes unitários via JUnit 5 e Mockito, testes de rota HTTP com MockMvc, cobrindo caminhos felizes e tristes, validações do Spring Security JWT, exceções e muito mais.
-
-![Build Status](https://github.com/Cyteee/Stealth_Garage_API/actions/workflows/ci.yml/badge.svg)
 
 ## Como executar a Stealth Garage API com Docker:
 
