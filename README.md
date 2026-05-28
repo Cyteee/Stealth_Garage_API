@@ -15,7 +15,7 @@ A API foi construída em Java + Spring Boot + JPA/Hibernate, com testes unitári
 ## Como executar a Stealth Garage API com Docker:
 
 ```Json
-git clone https://github.com/SEU-USUARIO/Stealth-Garage-API.git
+git clone https://github.com/Cyteee/Stealth_Garage_API.git
 
 cd Stealth-Garage-API
 ```
@@ -24,6 +24,12 @@ Depois execute a infraestrutura:
 
 ```Json
 docker-compose up --build -d
+```
+
+Como rodar testes unitarios:
+
+```Json
+./mvnw clean test
 ```
 
 e agora sinta-se livre para executar os endpoints apresentados ao longo de todo README abaixo:
