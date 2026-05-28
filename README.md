@@ -133,7 +133,7 @@ Certifique-se de ter o Java e o Git instalados em seu computador
 Abra o terminal Git e clone esse repositorio: 
 
 ```Bash
-git clone https://github.com/SEU-USUARIO/Stealth-Garage-API.git
+git clone https://github.com/Cyteee/Stealth_Garage_API.git
 ```
 
 Abra sua IDE
