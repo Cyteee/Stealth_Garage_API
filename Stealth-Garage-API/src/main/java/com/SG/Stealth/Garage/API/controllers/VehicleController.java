@@ -7,6 +7,7 @@ import com.SG.Stealth.Garage.API.services.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,7 +63,7 @@ public class VehicleController {
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody VehicleDTO objDto){
+    public ResponseEntity<Void> insert(@Valid @RequestBody VehicleDTO objDto){
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         User loggedUser = (User) authentication.getPrincipal();
         Vehicle obj = vehicleService.fromDTO(objDto, loggedUser);
@@ -77,7 +78,7 @@ public class VehicleController {
     @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody VehicleDTO objDto){
+    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody VehicleDTO objDto){
         Vehicle obj = vehicleService.fromDTO(objDto, null);
         obj.setId(id);
         obj = vehicleService.update(id, obj);

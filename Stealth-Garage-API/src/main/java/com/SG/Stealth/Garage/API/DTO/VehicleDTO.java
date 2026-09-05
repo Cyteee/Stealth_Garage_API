@@ -1,6 +1,8 @@
 package com.SG.Stealth.Garage.API.DTO;
 
 import com.SG.Stealth.Garage.API.entities.Vehicle;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 
@@ -8,8 +10,13 @@ public class VehicleDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    @NotBlank(message = "The brand and name is mandatory and cannot be left blank.")
     private String brandAndName;
+    @NotBlank(message = "The year is mandatory.")
+    @Size(min = 1900, max = 2030, message = "The year must be on the right format.")
     private int year;
+    @NotBlank(message = "The license plate is mandatory.")
+    @Size(min = 7, max = 8, message = "The license plate must be on the right format.")
     private String licensePlate;
 
     private UserDTO owner;
