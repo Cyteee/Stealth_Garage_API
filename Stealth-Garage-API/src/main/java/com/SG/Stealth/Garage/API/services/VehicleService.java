@@ -36,9 +36,12 @@ public class VehicleService {
         return vehicleRepository.save(obj);
     }
 
-    public Vehicle update(Long id, Vehicle obj){
+    public Vehicle update(Long id, Vehicle obj, User loggedUser){
         try {
             Vehicle entity = vehicleRepository.getReferenceById(id);
+            if (!entity.getOwner().getId().equals(loggedUser.getId())) {
+                throw new RuntimeException("Access Denied: You do not have permission to modify this resource.");
+            }
             updateData(entity, obj);
             return vehicleRepository.save(entity);
         }catch (EntityNotFoundException e){

@@ -1,7 +1,6 @@
 package com.SG.Stealth.Garage.API.controllers;
 
 import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
-import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.services.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,12 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.SG.Stealth.Garage.API.entities.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.data.domain.Pageable;
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,9 +80,11 @@ public class VehicleController {
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody VehicleDTO objDto){
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        User loggedUser = (User) authentication.getPrincipal();
         Vehicle obj = vehicleService.fromDTO(objDto, null);
         obj.setId(id);
-        obj = vehicleService.update(id, obj);
+        obj = vehicleService.update(id, obj, loggedUser);
         return ResponseEntity.noContent().build();
     }
 
