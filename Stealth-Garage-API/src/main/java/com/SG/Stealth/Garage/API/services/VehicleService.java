@@ -55,12 +55,16 @@ public class VehicleService {
         entity.setLicensePlate(obj.getLicensePlate());
     }
 
-    public void delete(Long id){
+    public void delete(Long id, User loggedUser){
         try {
-            vehicleRepository.deleteById(id);
-        }catch (EmptyResultDataAccessException e){
+            Vehicle entity = vehicleRepository.getReferenceById(id);
+            if (!entity.getOwner().getId().equals(loggedUser.getId())) {
+                throw new RuntimeException("Access Denied: You do not have permission to delete this resource.");
+            }
+            vehicleRepository.delete(entity);
+        } catch (EntityNotFoundException | EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException(id);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
     }

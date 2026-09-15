@@ -95,8 +95,10 @@ public class VehicleController {
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        vehicleService.delete(id);
-        logger.info("Vehicle " + id + "was deleted by the system.");
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        User loggedUser = (User) authentication.getPrincipal();
+        vehicleService.delete(id, loggedUser);
+        logger.info("Vehicle " + id + " was deleted by user " + loggedUser.getId());
         return ResponseEntity.noContent().build();
     }
 }
