@@ -1,15 +1,12 @@
 package com.SG.Stealth.Garage.API.services;
 
 import com.SG.Stealth.Garage.API.DTO.UserDTO;
-import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
 import com.SG.Stealth.Garage.API.controllers.exceptions.DatabaseException;
 import com.SG.Stealth.Garage.API.controllers.exceptions.ResourceNotFoundException;
 import com.SG.Stealth.Garage.API.entities.User;
-import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.entities.enums.UserRole;
 import com.SG.Stealth.Garage.API.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -71,7 +68,10 @@ public class UserService {
         entity.setPhoneNumber(obj.getPhoneNumber());
     }
 
-    public void delete(Long id){
+    public void delete(Long id, User loggedUser){
+        if (!id.equals(loggedUser.getId()) && loggedUser.getRole() != UserRole.ADMIN) {
+            throw new RuntimeException("Access Denied: You do not have permission to delete this account.");
+        }
         try {
             repository.deleteById(id);
         }catch (EmptyResultDataAccessException e){

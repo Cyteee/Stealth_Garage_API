@@ -75,7 +75,9 @@ public class UserController {
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        userService.delete(id);
+        var authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        User loggedUser = (User) authentication.getPrincipal();
+        userService.delete(id, loggedUser);
         return ResponseEntity.noContent().build();
     }
 }
