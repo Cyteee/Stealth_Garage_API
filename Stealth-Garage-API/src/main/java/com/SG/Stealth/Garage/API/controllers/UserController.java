@@ -27,10 +27,11 @@ public class UserController {
     @ApiResponse(responseCode = "200", description = "Found successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll(){
-        List<User> list = userService.findAll();
-        List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
+    public ResponseEntity<List<UserService.UserResponseDTO>> findAll() {
+        List<UserService.UserResponseDTO> listDto = userService.findAll().stream()
+                .map(UserService.UserResponseDTO::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(listDto);
     }
 
     @Operation(summary = "Find a user by ID", description = "Find a user by ID in the database")
@@ -48,10 +49,11 @@ public class UserController {
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody UserDTO objDto){
-        User obj = userService.fromDTO(objDto);
+    public ResponseEntity<Void> insert(@RequestBody UserService.UserRequestDTO dto) {
+        User obj = new User(null, dto.name(), dto.email(), dto.phoneNumber(), dto.password());
         obj = userService.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

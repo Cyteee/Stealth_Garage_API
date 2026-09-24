@@ -25,6 +25,8 @@ public class UserService {
 
     private List<String> adminEmails;
 
+    public record UserRequestDTO(String name, String email, String phoneNumber, String password) {}
+
     public UserService(UserRepository repository,
                        PasswordEncoder passwordEncoder,
                        @Value("${admin.emails}") List<String> adminEmails) {
@@ -81,14 +83,9 @@ public class UserService {
         }
     }
 
-    public User fromDTO(UserDTO objDto){
-        User user = new User(
-                objDto.getId(),
-                objDto.getName(),
-                objDto.getEmail(),
-                objDto.getPhoneNumber(),
-                objDto.getPassword()
-        );
-        return user;
+    public record UserResponseDTO(Long id, String name, String email, String phoneNumber, UserRole role) {
+        public UserResponseDTO(User user) {
+            this(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getRole());
+        }
     }
 }
