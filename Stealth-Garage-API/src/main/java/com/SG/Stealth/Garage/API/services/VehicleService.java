@@ -27,64 +27,37 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public Vehicle findById(Long id) {
-        Optional<Vehicle> obj = vehicleRepository.findById(id);
-        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+    public Page<Vehicle> findAllPagedByOwner(Pageable pageable, User owner) {
+        return vehicleRepository.findAllByOwner(owner, pageable);
     }
 
-    public Vehicle insert(Vehicle obj){
+    public Page<Vehicle> searchByYearAndOwner(Integer year, Pageable pageable, User owner) {
+        return vehicleRepository.findByYearAndOwner(year, owner, pageable);
+    }
+
+    public Vehicle findByIdAndOwner(Long id, User owner) {
+        return vehicleRepository.findByIdAndOwner(id, owner)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
+    public Vehicle insert(Vehicle obj) {
         return vehicleRepository.save(obj);
     }
 
-    public Vehicle update(Long id, Vehicle obj, User loggedUser){
-        try {
-            Vehicle entity = vehicleRepository.getReferenceById(id);
-            if (!entity.getOwner().getId().equals(loggedUser.getId())) {
-                throw new RuntimeException("Access Denied: You do not have permission to modify this resource.");
-            }
-            updateData(entity, obj);
-            return vehicleRepository.save(entity);
-        }catch (EntityNotFoundException e){
-            throw new ResourceNotFoundException(id);
-        }
-    }
-
-    private void updateData(Vehicle entity, Vehicle obj){
+    public Vehicle update(Long id, Vehicle obj, User loggedUser) {
+        Vehicle entity = findByIdAndOwner(id, loggedUser);
         entity.setBrandAndName(obj.getBrandAndName());
         entity.setYear(obj.getYear());
         entity.setLicensePlate(obj.getLicensePlate());
+        return vehicleRepository.save(entity);
     }
 
-    public void delete(Long id, User loggedUser){
+    public void delete(Long id, User loggedUser) {
+        Vehicle entity = findByIdAndOwner(id, loggedUser);
         try {
-            Vehicle entity = vehicleRepository.getReferenceById(id);
-            if (!entity.getOwner().getId().equals(loggedUser.getId())) {
-                throw new RuntimeException("Access Denied: You do not have permission to delete this resource.");
-            }
             vehicleRepository.delete(entity);
-        } catch (EntityNotFoundException | EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException("Cannot delete vehicle because it has related service orders.");
         }
-    }
-
-    public Vehicle fromDTO(VehicleDTO objDto, User owner) {
-
-        return new Vehicle(
-                objDto.getId(),
-                objDto.getBrandAndName(),
-                objDto.getYear(),
-                objDto.getLicensePlate(),
-                owner
-        );
-    }
-
-    public Page<Vehicle> findAllPaged(Pageable pageable) {
-        return vehicleRepository.findAll(pageable);
-    }
-
-    public Page<Vehicle> searchByYear(Integer ano, Pageable pageable) {
-        return vehicleRepository.searchByYear(ano, pageable);
     }
 }

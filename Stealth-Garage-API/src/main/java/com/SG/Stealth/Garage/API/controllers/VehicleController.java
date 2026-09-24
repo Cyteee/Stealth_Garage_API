@@ -1,6 +1,8 @@
 package com.SG.Stealth.Garage.API.controllers;
 
 import com.SG.Stealth.Garage.API.DTO.VehicleDTO;
+import com.SG.Stealth.Garage.API.DTO.VehicleRequestDTO;
+import com.SG.Stealth.Garage.API.DTO.VehicleResponseDTO;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import com.SG.Stealth.Garage.API.services.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +12,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,15 +41,16 @@ public class VehicleController {
     @ApiResponse(responseCode = "200", description = "Found successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @GetMapping
-    public ResponseEntity<Page<VehicleDTO>> findAll(@RequestParam(name = "ano", required = false) Integer ano, Pageable pageable) {
-        Page<Vehicle> page;
-        if (ano != null) {
-            page = vehicleService.searchByYear(ano, pageable);
-        } else {
-            page = vehicleService.findAllPaged(pageable);
-        }
-        Page<VehicleDTO> pageDto = page.map(VehicleDTO::new);
-        return ResponseEntity.ok().body(pageDto);
+    public ResponseEntity<Page<VehicleResponseDTO>> findAll(
+            @RequestParam(name = "ano", required = false) Integer ano,
+            Pageable pageable,
+            @AuthenticationPrincipal User loggedUser) {
+
+        Page<Vehicle> page = (ano != null)
+                ? vehicleService.searchByYearAndOwner(ano, pageable, loggedUser)
+                : vehicleService.findAllPagedByOwner(pageable, loggedUser);
+
+        return ResponseEntity.ok(page.map(VehicleResponseDTO::new));
     }
 
     @Operation(summary = "Find a vehicle by ID", description = "Find a vehicle by ID in the database")
@@ -54,9 +58,11 @@ public class VehicleController {
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<VehicleDTO> findById(@PathVariable Long id){
-        Vehicle obj = vehicleService.findById(id);
-        return ResponseEntity.ok().body(new VehicleDTO(obj));
+    public ResponseEntity<VehicleResponseDTO> findById(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User loggedUser) {
+        Vehicle obj = vehicleService.findByIdAndOwner(id, loggedUser);
+        return ResponseEntity.ok(new VehicleResponseDTO(obj));
     }
 
     @Operation(summary = "Create a new vehicle", description = "Create a vehicle in the database")
@@ -64,10 +70,10 @@ public class VehicleController {
     @ApiResponse(responseCode = "400", description = "Invalid input data")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody VehicleDTO objDto){
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        User loggedUser = (User) authentication.getPrincipal();
-        Vehicle obj = vehicleService.fromDTO(objDto, loggedUser);
+    public ResponseEntity<Void> insert(
+            @Valid @RequestBody VehicleRequestDTO dto,
+            @AuthenticationPrincipal User loggedUser) {
+        Vehicle obj = new Vehicle(null, dto.brandAndName(), dto.year(), dto.licensePlate(), loggedUser);
         obj = vehicleService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -79,12 +85,12 @@ public class VehicleController {
     @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody VehicleDTO objDto){
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        User loggedUser = (User) authentication.getPrincipal();
-        Vehicle obj = vehicleService.fromDTO(objDto, null);
-        obj.setId(id);
-        obj = vehicleService.update(id, obj, loggedUser);
+    public ResponseEntity<Void> update(
+            @PathVariable Long id,
+            @Valid @RequestBody VehicleRequestDTO dto,
+            @AuthenticationPrincipal User loggedUser) {
+        Vehicle obj = new Vehicle(id, dto.brandAndName(), dto.year(), dto.licensePlate(), loggedUser);
+        vehicleService.update(id, obj, loggedUser);
         return ResponseEntity.noContent().build();
     }
 
@@ -94,9 +100,9 @@ public class VehicleController {
     @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "404", description = "Resource not found")
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        User loggedUser = (User) authentication.getPrincipal();
+    public ResponseEntity<Void> delete(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User loggedUser) {
         vehicleService.delete(id, loggedUser);
         logger.info("Vehicle " + id + " was deleted by user " + loggedUser.getId());
         return ResponseEntity.noContent().build();

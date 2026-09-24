@@ -1,5 +1,6 @@
 package com.SG.Stealth.Garage.API.repositories;
 
+import com.SG.Stealth.Garage.API.entities.User;
 import com.SG.Stealth.Garage.API.entities.Vehicle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.Optional;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query("SELECT v FROM Vehicle v WHERE v.year = :ano")
@@ -21,4 +23,10 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     @Query("SELECT v FROM Vehicle v WHERE v.year = :ano")
     Page<Vehicle> searchByYear(@Param("ano") Integer ano, Pageable pageable);
+
+    Optional<Vehicle> findByIdAndOwner(Long id, User owner);
+
+    Page<Vehicle> findAllByOwner(User owner, Pageable pageable);
+
+    Page<Vehicle> findByYearAndOwner(Integer year, User owner, Pageable pageable);
 }
